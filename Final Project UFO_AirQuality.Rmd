@@ -13,7 +13,7 @@ output: html_notebook
 
 ## Research Question
 
-Where are UFO sightings in the United States associated with pollutant levels of carbon monoxide (CO) and nitrogen dioxide (NO2) from 2000 to 2008?
+Where are UFO sightings in the United States associated with pollutant levels of carbon monoxide (CO) and nitrogen dioxide (NO2) and how do these levels change over time? 
 
 
 ## Purpose
@@ -92,6 +92,7 @@ UFO_US <-
   UFO %>%
   filter(Country == "USA") 
 
+UFO_US$State <- unlist(lapply(UFO_US$State, tolower))
 str(UFO_US)
 ```
 
@@ -161,8 +162,6 @@ kable(head(AirQ_long))
 ## Joining the 2 Data Sets
 
 ```{r, warning = FALSE, message = FALSE}
-UFO_US$State <- unlist(lapply(UFO_US$State, tolower))
-
 Join <- left_join(UFO_US %>% group_by(State) %>% mutate(id = row_number()), 
                     AirQ_long %>% group_by(state) %>% mutate(id = row_number()), 
                     by = c("State" = "state", "id"))
@@ -318,11 +317,133 @@ Year_CO
 
 ## Data Visualization
 
+## For NO2
+
+```{r, warning = FALSE, message = FALSE}
+NO2_years <- 
+    NO2_capital %>%
+    group_by(pollutants, year) %>%
+    summarise(avg = mean(value)) %>%
+    ggplot(aes(x = year, y = avg, color = pollutants)) +
+    geom_point(alpha=0.2) + geom_line(aes(group = pollutants)) 
+
+NO2_years
+```
+
+```{r, warning = FALSE, message = FALSE}
+NO2_boxplot <-
+  NO2_capital %>%
+  ggplot(aes(y = value, x = year)) +
+  geom_boxplot(aes(fill = pollutants),
+               notch = TRUE) 
+
+NO2_boxplot
+```
+
+```{r, warning = FALSE, message = FALSE}
+NO2_months <- 
+  NO2_capital %>%
+    group_by(pollutants, month) %>%
+    summarise(avg = mean(value)) %>% 
+    ggplot(aes(x = month, y = avg, fill = pollutants)) +
+    geom_bar(stat="identity", position="dodge") 
+
+NO2_months
+```
+
+```{r, warning = FALSE, message = FALSE}
+str(NO2_capital)
+
+NO2_capital$hour <- as.integer(NO2_capital$hour)
+
+NO2_smooth <- 
+  NO2_capital %>%
+  group_by(pollutants, hour) %>%
+  summarise(avg = mean(value)) %>%
+  ggplot(aes(x = hour, y = avg, color = pollutants)) + 
+  geom_point() + 
+  geom_smooth() 
+
+NO2_smooth
+```
 
 
 
+## For CO
+
+```{r, warning = FALSE, message = FALSE}
+CO_years <- 
+    CO_capital %>%
+    group_by(pollutants, year) %>%
+    summarise(avg = mean(value)) %>%
+    ggplot(aes(x = year, y = avg, color = pollutants)) +
+    geom_point(alpha=0.2) + geom_line(aes(group = pollutants)) 
+
+CO_years
+```
+
+```{r, warning = FALSE, message = FALSE}
+CO_boxplot <-
+  CO_capital %>%
+  ggplot(aes(y = value, x = year)) +
+  geom_boxplot(aes(fill = pollutants),
+               notch = TRUE) 
+
+CO_boxplot
+```
+
+```{r, warning = FALSE, message = FALSE}
+CO_months <- 
+  CO_capital %>%
+    group_by(pollutants, month) %>%
+    summarise(avg = mean(value)) %>% 
+    ggplot(aes(x = month, y = avg, fill = pollutants)) +
+    geom_bar(stat="identity", position="dodge") 
+
+CO_months
+```
+
+```{r, warning = FALSE, message = FALSE}
+CO_capital$hour <- as.integer(as.factor(CO_capital$hour))
+
+CO_smooth <-
+  CO_capital %>%
+  group_by(pollutants, hour) %>%
+  summarise(avg = mean(value)) %>%
+  ggplot(aes(x = hour, y = avg, color = pollutants)) +
+  geom_point() +
+  geom_smooth()
+
+CO_smooth
+```
 
 
+
+## For NO2 & CO
+
+```{r, warning = FALSE, message = FALSE}
+#Combiing NO2 & CO data frames
+NO2_CO <- 
+  rbind(NO2_capital, CO_capital)
+  
+View(NO2_CO)
+```
+
+```{r, fig.width = 10}
+Pollutants_Regions <- ggplot(data=NO2_CO,aes(x=year,y=value ,fill=Region))+geom_bar(stat='identity',position='stack', width=.9)+ facet_wrap(~pollutants,ncol=3) + ggtitle("NO2 & CO pollutant levels in U.S. regions over time") + theme(axis.text.x = element_text(angle = 60, hjust = 1))
+
+Pollutants_Regions
+```
+
+
+```{r, fig.height = 8, fig.width = 10}
+Pollutants_States <- ggplot(data=NO2_CO,aes(x=year,y=value ,fill=pollutants))+geom_bar(stat='identity',position='dodge', width=.9)+ facet_wrap(~State,ncol=3) + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + ggtitle("NO2 & CO pollutant levels in U.S. states over time")
+
+Pollutants_States
+```
+
+
+## Conclusions 
 
 
 
