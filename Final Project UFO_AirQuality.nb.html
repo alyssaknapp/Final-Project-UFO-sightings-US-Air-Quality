@@ -2218,34 +2218,25 @@ $ ET            [3m[38;5;246m&lt;int&gt;[39m[23m 1, 1, 1, 1, 1, 1, 1, 1, 1, 
 <h2>Data Cleaning &amp; Wrangling for Data Set 1</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI0xpbWl0aW5nIHRvIFVTQVxuVUZPX1VTIDwtIFxuICBVRk8gJT4lXG4gIGZpbHRlcihDb3VudHJ5ID09IFwiVVNBXCIpIFxuYGBgIn0= -->
-<pre class="r"><code>#Limiting to USA
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI0xpbWl0aW5nIHRvIFVTQSBvbmx5XG5VRk9fVVMgPC0gXG4gIFVGTyAlPiVcbiAgZmlsdGVyKENvdW50cnkgPT0gXCJVU0FcIikgXG5cbnN0cihVRk9fVVMpXG5gYGAifQ== -->
+<pre class="r"><code>#Limiting to USA only
 UFO_US &lt;- 
   UFO %&gt;%
-  filter(Country == &quot;USA&quot;) </code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuVUZPX1VTJFN0YXRlIDwtIHVubGlzdChsYXBwbHkoVUZPX1VTJFN0YXRlLCB0b2xvd2VyKSlcbnN0cihVRk9fVVMpXG5gYGAifQ== -->
-<pre class="r"><code>UFO_US$State &lt;- unlist(lapply(UFO_US$State, tolower))
+  filter(Country == &quot;USA&quot;) 
+
 str(UFO_US)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoidGliYmxlIFs1LDAyNyB4IDhdIChTMzogdGJsX2RmL3RibC9kYXRhLmZyYW1lKVxuICQgRGF0ZS5UaW1lOiBjaHIgWzE6NTAyN10gXCIxMi8yMS8xNiAxOToxNVwiIFwiMTIvMjEvMTYgMDA6MDBcIiBcIjEyLzIwLzE2IDIyOjMwXCIgXCIxMi8yMC8xNiAxOTowMFwiIC4uLlxuICQgQ291bnRyeSAgOiBjaHIgWzE6NTAyN10gXCJVU0FcIiBcIlVTQVwiIFwiVVNBXCIgXCJVU0FcIiAuLi5cbiAkIENpdHkgICAgIDogY2hyIFsxOjUwMjddIFwiV2F5bmVzYm9yb1wiIFwiTG91aXN2aWxsZVwiIFwiU2FudGEgUm9zYVwiIFwiRnJlc25vXCIgLi4uXG4gJCBTdGF0ZSAgICA6IGNociBbMTo1MDI3XSBcInZhXCIgXCJreVwiIFwiY2FcIiBcImNhXCIgLi4uXG4gJCBTaGFwZSAgICA6IGNociBbMTo1MDI3XSBcIlNwaGVyZVwiIFwiVW5rbm93blwiIFwiU3BoZXJlXCIgXCJDaXJjbGVcIiAuLi5cbiAkIFN1bW1hcnkgIDogY2hyIFsxOjUwMjddIFwiQnJpZ2h0IHJvdW5kIG9iamVjdCBob3ZlcmluZyBpbiBza3kuXCIgXCJNdWx0aXBsZSBjcmFmdCBhc2NlbmRpbmcgZnJvbSBub3J0aCBvZiBTaGVsYnl2aWxsZSByb2FkLCB2ZXJ5IGJyaWdodCBhbmQgXFxyXFxudmVyeSBxdWlldCBpbiBjb21wYXJpc29uIHRvIHBhc3NlblwifCBfX3RydW5jYXRlZF9fIFwiQnJpZ2h0IG9yYW5nZSBwbGFuZXQtbGlrZSBvYmplY3Qgc2lnaHRlZCBuZWFyIENhc3Npb3BpYVwiIFwiVHdlbHZlIG9yYW5nZSBnbG9iZXMgaW4gZm9ybWF0aW9uIG92ZXIgRnJlc25vXCIgLi4uXG4gJCBsYXQgICAgICA6IG51bSBbMTo1MDI3XSAzOC4xIDM4LjMgMzguNCAzNi43IDMzLjIgLi4uXG4gJCBsbmcgICAgICA6IG51bSBbMTo1MDI3XSAtNzguOSAtODUuOCAtMTIyLjcgLTExOS43IC0xMTEuMiAuLi5cbiJ9 -->
+<!-- rnb-output-begin eyJkYXRhIjoidGliYmxlIFs1LDAyNyB4IDhdIChTMzogdGJsX2RmL3RibC9kYXRhLmZyYW1lKVxuICQgRGF0ZS5UaW1lOiBjaHIgWzE6NTAyN10gXCIxMi8yMS8xNiAxOToxNVwiIFwiMTIvMjEvMTYgMDA6MDBcIiBcIjEyLzIwLzE2IDIyOjMwXCIgXCIxMi8yMC8xNiAxOTowMFwiIC4uLlxuICQgQ291bnRyeSAgOiBjaHIgWzE6NTAyN10gXCJVU0FcIiBcIlVTQVwiIFwiVVNBXCIgXCJVU0FcIiAuLi5cbiAkIENpdHkgICAgIDogY2hyIFsxOjUwMjddIFwiV2F5bmVzYm9yb1wiIFwiTG91aXN2aWxsZVwiIFwiU2FudGEgUm9zYVwiIFwiRnJlc25vXCIgLi4uXG4gJCBTdGF0ZSAgICA6IGNociBbMTo1MDI3XSBcIlZBXCIgXCJLWVwiIFwiQ0FcIiBcIkNBXCIgLi4uXG4gJCBTaGFwZSAgICA6IGNociBbMTo1MDI3XSBcIlNwaGVyZVwiIFwiVW5rbm93blwiIFwiU3BoZXJlXCIgXCJDaXJjbGVcIiAuLi5cbiAkIFN1bW1hcnkgIDogY2hyIFsxOjUwMjddIFwiQnJpZ2h0IHJvdW5kIG9iamVjdCBob3ZlcmluZyBpbiBza3kuXCIgXCJNdWx0aXBsZSBjcmFmdCBhc2NlbmRpbmcgZnJvbSBub3J0aCBvZiBTaGVsYnl2aWxsZSByb2FkLCB2ZXJ5IGJyaWdodCBhbmQgXFxyXFxudmVyeSBxdWlldCBpbiBjb21wYXJpc29uIHRvIHBhc3NlblwifCBfX3RydW5jYXRlZF9fIFwiQnJpZ2h0IG9yYW5nZSBwbGFuZXQtbGlrZSBvYmplY3Qgc2lnaHRlZCBuZWFyIENhc3Npb3BpYVwiIFwiVHdlbHZlIG9yYW5nZSBnbG9iZXMgaW4gZm9ybWF0aW9uIG92ZXIgRnJlc25vXCIgLi4uXG4gJCBsYXQgICAgICA6IG51bSBbMTo1MDI3XSAzOC4xIDM4LjMgMzguNCAzNi43IDMzLjIgLi4uXG4gJCBsbmcgICAgICA6IG51bSBbMTo1MDI3XSAtNzguOSAtODUuOCAtMTIyLjcgLTExOS43IC0xMTEuMiAuLi5cbiJ9 -->
 <pre><code>tibble [5,027 x 8] (S3: tbl_df/tbl/data.frame)
  $ Date.Time: chr [1:5027] &quot;12/21/16 19:15&quot; &quot;12/21/16 00:00&quot; &quot;12/20/16 22:30&quot; &quot;12/20/16 19:00&quot; ...
  $ Country  : chr [1:5027] &quot;USA&quot; &quot;USA&quot; &quot;USA&quot; &quot;USA&quot; ...
  $ City     : chr [1:5027] &quot;Waynesboro&quot; &quot;Louisville&quot; &quot;Santa Rosa&quot; &quot;Fresno&quot; ...
- $ State    : chr [1:5027] &quot;va&quot; &quot;ky&quot; &quot;ca&quot; &quot;ca&quot; ...
+ $ State    : chr [1:5027] &quot;VA&quot; &quot;KY&quot; &quot;CA&quot; &quot;CA&quot; ...
  $ Shape    : chr [1:5027] &quot;Sphere&quot; &quot;Unknown&quot; &quot;Sphere&quot; &quot;Circle&quot; ...
  $ Summary  : chr [1:5027] &quot;Bright round object hovering in sky.&quot; &quot;Multiple craft ascending from north of Shelbyville road, very bright and \r\nvery quiet in comparison to passen&quot;| __truncated__ &quot;Bright orange planet-like object sighted near Cassiopia&quot; &quot;Twelve orange globes in formation over Fresno&quot; ...
  $ lat      : num [1:5027] 38.1 38.3 38.4 36.7 33.2 ...
  $ lng      : num [1:5027] -78.9 -85.8 -122.7 -119.7 -111.2 ...</code></pre>
 <!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuVmlldyhVRk9fVVMpXG5gYGAifQ== -->
-<pre class="r"><code>View(UFO_US)</code></pre>
-<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -2302,163 +2293,6 @@ Air_Q$date &lt;- NULL
 
 kable(head(Air_Q))</code></pre>
 <!-- rnb-source-end -->
-
-<!-- rnb-html-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImtuaXRfYXNpcyJdLCJzaXppbmdQb2xpY3kiOltdfX0= -->
-
-<table>
-<colgroup>
-<col width="4%" />
-<col width="2%" />
-<col width="4%" />
-<col width="3%" />
-<col width="3%" />
-<col width="6%" />
-<col width="9%" />
-<col width="9%" />
-<col width="5%" />
-<col width="6%" />
-<col width="9%" />
-<col width="8%" />
-<col width="4%" />
-<col width="2%" />
-<col width="14%" />
-<col width="5%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">state</th>
-<th align="left">day</th>
-<th align="left">month</th>
-<th align="left">year</th>
-<th align="left">hour</th>
-<th align="right">NO2.Mean</th>
-<th align="right">NO2.Max.Value</th>
-<th align="right">NO2.Max.Hour</th>
-<th align="right">NO2.AQI</th>
-<th align="right">CO.Mean</th>
-<th align="right">CO.Max.Value</th>
-<th align="right">CO.Max.Hour</th>
-<th align="right">CO.AQI</th>
-<th align="right">ET</th>
-<th align="left">date_time</th>
-<th align="left">weekday</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">az</td>
-<td align="left">7</td>
-<td align="left">7</td>
-<td align="left">2000</td>
-<td align="left">21</td>
-<td align="right">7.375000</td>
-<td align="right">15</td>
-<td align="right">6</td>
-<td align="right">14</td>
-<td align="right">0.195833</td>
-<td align="right">0.3</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">1</td>
-<td align="left">2000-07-07 21:00:00</td>
-<td align="left">6</td>
-</tr>
-<tr class="even">
-<td align="left">az</td>
-<td align="left">7</td>
-<td align="left">7</td>
-<td align="left">2000</td>
-<td align="left">21</td>
-<td align="right">7.375000</td>
-<td align="right">15</td>
-<td align="right">6</td>
-<td align="right">14</td>
-<td align="right">0.195833</td>
-<td align="right">0.3</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">1</td>
-<td align="left">2000-07-07 21:00:00</td>
-<td align="left">6</td>
-</tr>
-<tr class="odd">
-<td align="left">az</td>
-<td align="left">6</td>
-<td align="left">9</td>
-<td align="left">2001</td>
-<td align="left">21</td>
-<td align="right">7.708333</td>
-<td align="right">19</td>
-<td align="right">6</td>
-<td align="right">18</td>
-<td align="right">0.175000</td>
-<td align="right">0.7</td>
-<td align="right">6</td>
-<td align="right">NA</td>
-<td align="right">1</td>
-<td align="left">2001-09-06 21:00:00</td>
-<td align="left">5</td>
-</tr>
-<tr class="even">
-<td align="left">az</td>
-<td align="left">5</td>
-<td align="left">6</td>
-<td align="left">2005</td>
-<td align="left">21</td>
-<td align="right">7.916667</td>
-<td align="right">17</td>
-<td align="right">6</td>
-<td align="right">16</td>
-<td align="right">0.416667</td>
-<td align="right">0.6</td>
-<td align="right">6</td>
-<td align="right">NA</td>
-<td align="right">1</td>
-<td align="left">2005-06-05 21:00:00</td>
-<td align="left">1</td>
-</tr>
-<tr class="odd">
-<td align="left">az</td>
-<td align="left">5</td>
-<td align="left">10</td>
-<td align="left">2007</td>
-<td align="left">2</td>
-<td align="right">8.625000</td>
-<td align="right">20</td>
-<td align="right">6</td>
-<td align="right">19</td>
-<td align="right">0.212500</td>
-<td align="right">0.3</td>
-<td align="right">5</td>
-<td align="right">NA</td>
-<td align="right">1</td>
-<td align="left">2007-10-05 02:00:00</td>
-<td align="left">6</td>
-</tr>
-<tr class="even">
-<td align="left">az</td>
-<td align="left">5</td>
-<td align="left">10</td>
-<td align="left">2007</td>
-<td align="left">21</td>
-<td align="right">8.625000</td>
-<td align="right">20</td>
-<td align="right">6</td>
-<td align="right">19</td>
-<td align="right">0.212500</td>
-<td align="right">0.3</td>
-<td align="right">5</td>
-<td align="right">NA</td>
-<td align="right">1</td>
-<td align="left">2007-10-05 21:00:00</td>
-<td align="left">6</td>
-</tr>
-</tbody>
-</table>
-
-
-<!-- rnb-html-end -->
-
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -2474,25 +2308,6 @@ Air_Q$month &lt;- factor(Air_Q$month, labels = c(&quot;Jan&quot;, &quot;Feb&quot
 Air_Q$weekday &lt;- factor(Air_Q$weekday,labels = c(&quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;))
 str(Air_Q)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiJ2RhdGEuZnJhbWUnOlx0NjIxIG9icy4gb2YgIDE2IHZhcmlhYmxlczpcbiAkIHN0YXRlICAgICAgICA6IGNociAgXCJhelwiIFwiYXpcIiBcImF6XCIgXCJhelwiIC4uLlxuICQgZGF5ICAgICAgICAgIDogRmFjdG9yIHcvIDMxIGxldmVscyBcIjFcIixcIjJcIixcIjNcIixcIjRcIiwuLjogNyA3IDYgNSA1IDUgNiAxMiA3IDkgLi4uXG4gJCBtb250aCAgICAgICAgOiBGYWN0b3Igdy8gMTIgbGV2ZWxzIFwiSmFuXCIsXCJGZWJcIixcIk1hclwiLC4uOiA3IDcgOSA2IDEwIDEwIDggOSA3IDEwIC4uLlxuICQgeWVhciAgICAgICAgIDogRmFjdG9yIHcvIDkgbGV2ZWxzIFwiMjAwMFwiLFwiMjAwMVwiLC4uOiAxIDEgMiA2IDggOCAzIDcgNyA2IC4uLlxuICQgaG91ciAgICAgICAgIDogRmFjdG9yIHcvIDI0IGxldmVscyBcIjBcIixcIjFcIixcIjJcIixcIjNcIiwuLjogMjIgMjIgMjIgMjIgMyAyMiAyMyA2IDEgMjEgLi4uXG4gJCBOTzIuTWVhbiAgICAgOiBudW0gIDcuMzggNy4zOCA3LjcxIDcuOTIgOC42MiAuLi5cbiAkIE5PMi5NYXguVmFsdWU6IG51bSAgMTUgMTUgMTkgMTcgMjAgMjAgMTkgMjcuMyAxOSAyNiAuLi5cbiAkIE5PMi5NYXguSG91ciA6IGludCAgNiA2IDYgNiA2IDYgMjEgNiAwIDUgLi4uXG4gJCBOTzIuQVFJICAgICAgOiBpbnQgIDE0IDE0IDE4IDE2IDE5IDE5IDE4IDI1IDE4IDI1IC4uLlxuICQgQ08uTWVhbiAgICAgIDogbnVtICAwLjE5NiAwLjE5NiAwLjE3NSAwLjQxNyAwLjIxMiAuLi5cbiAkIENPLk1heC5WYWx1ZSA6IG51bSAgMC4zIDAuMyAwLjcgMC42IDAuMyAwLjMgMC4zIDAuOCAwLjQgMC4zIC4uLlxuICQgQ08uTWF4LkhvdXIgIDogaW50ICAwIDAgNiA2IDUgNSAxIDcgMCA2IC4uLlxuICQgQ08uQVFJICAgICAgIDogaW50ICAzIDMgTkEgTkEgTkEgTkEgMyBOQSBOQSBOQSAuLi5cbiAkIEVUICAgICAgICAgICA6IGludCAgMSAxIDEgMSAxIDEgMSAxIDEgMSAuLi5cbiAkIGRhdGVfdGltZSAgICA6IFBPU0lYY3QsIGZvcm1hdDogXCIyMDAwLTA3LTA3IDIxOjAwOjAwXCIgXCIyMDAwLTA3LTA3IDIxOjAwOjAwXCIgXCIyMDAxLTA5LTA2IDIxOjAwOjAwXCIgXCIyMDA1LTA2LTA1IDIxOjAwOjAwXCIgLi4uXG4gJCB3ZWVrZGF5ICAgICAgOiBGYWN0b3Igdy8gNyBsZXZlbHMgXCJNb25cIixcIlR1ZVwiLFwiV2VkXCIsLi46IDYgNiA1IDEgNiA2IDMgMyA2IDEgLi4uXG4ifQ== -->
-<pre><code>&#39;data.frame&#39;:   621 obs. of  16 variables:
- $ state        : chr  &quot;az&quot; &quot;az&quot; &quot;az&quot; &quot;az&quot; ...
- $ day          : Factor w/ 31 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,..: 7 7 6 5 5 5 6 12 7 9 ...
- $ month        : Factor w/ 12 levels &quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,..: 7 7 9 6 10 10 8 9 7 10 ...
- $ year         : Factor w/ 9 levels &quot;2000&quot;,&quot;2001&quot;,..: 1 1 2 6 8 8 3 7 7 6 ...
- $ hour         : Factor w/ 24 levels &quot;0&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,..: 22 22 22 22 3 22 23 6 1 21 ...
- $ NO2.Mean     : num  7.38 7.38 7.71 7.92 8.62 ...
- $ NO2.Max.Value: num  15 15 19 17 20 20 19 27.3 19 26 ...
- $ NO2.Max.Hour : int  6 6 6 6 6 6 21 6 0 5 ...
- $ NO2.AQI      : int  14 14 18 16 19 19 18 25 18 25 ...
- $ CO.Mean      : num  0.196 0.196 0.175 0.417 0.212 ...
- $ CO.Max.Value : num  0.3 0.3 0.7 0.6 0.3 0.3 0.3 0.8 0.4 0.3 ...
- $ CO.Max.Hour  : int  0 0 6 6 5 5 1 7 0 6 ...
- $ CO.AQI       : int  3 3 NA NA NA NA 3 NA NA NA ...
- $ ET           : int  1 1 1 1 1 1 1 1 1 1 ...
- $ date_time    : POSIXct, format: &quot;2000-07-07 21:00:00&quot; &quot;2000-07-07 21:00:00&quot; &quot;2001-09-06 21:00:00&quot; &quot;2005-06-05 21:00:00&quot; ...
- $ weekday      : Factor w/ 7 levels &quot;Mon&quot;,&quot;Tue&quot;,&quot;Wed&quot;,..: 6 6 5 1 6 6 3 3 6 1 ...</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -2505,13 +2320,54 @@ AirQ_long &lt;-
 
 kable(head(AirQ_long))</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="joining-the-2-data-sets" class="section level2">
+<h2>Joining the 2 Data Sets</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuVUZPX1VTJFN0YXRlIDwtIHVubGlzdChsYXBwbHkoVUZPX1VTJFN0YXRlLCB0b2xvd2VyKSlcblxuSm9pbiA8LSBsZWZ0X2pvaW4oVUZPX1VTICU+JSBncm91cF9ieShTdGF0ZSkgJT4lIG11dGF0ZShpZCA9IHJvd19udW1iZXIoKSksIFxuICAgICAgICAgICAgICAgICAgICBBaXJRX2xvbmcgJT4lIGdyb3VwX2J5KHN0YXRlKSAlPiUgbXV0YXRlKGlkID0gcm93X251bWJlcigpKSwgXG4gICAgICAgICAgICAgICAgICAgIGJ5ID0gYyhcIlN0YXRlXCIgPSBcInN0YXRlXCIsIFwiaWRcIikpXG5cbiNTZWxlY3Qgb25seSBjb3JyZXNwb25kaW5nIHZhcmlhYmxlc1xuSm9pbmVkIDwtIFxuICBKb2luICU+JVxuICBzZWxlY3QoQ291bnRyeSwgU3RhdGUsIFJlZ2lvbiwgZGF5LCBtb250aCwgeWVhciwgaG91ciwgRVQsIGRhdGVfdGltZSwgd2Vla2RheSwgcG9sbHV0YW50cywgdmFsdWUpXG5gYGAifQ== -->
+<pre class="r"><code>UFO_US$State &lt;- unlist(lapply(UFO_US$State, tolower))
+
+Join &lt;- left_join(UFO_US %&gt;% group_by(State) %&gt;% mutate(id = row_number()), 
+                    AirQ_long %&gt;% group_by(state) %&gt;% mutate(id = row_number()), 
+                    by = c(&quot;State&quot; = &quot;state&quot;, &quot;id&quot;))
+
+#Select only corresponding variables
+Joined &lt;- 
+  Join %&gt;%
+  select(Country, State, Region, day, month, year, hour, ET, date_time, weekday, pollutants, value)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1JlbW92ZSBNaXNzaW5nIENhc2VzIGZyb20gSm9pbmVkIHRhYmxlXG5VRk9fQWlyUSA8LSBuYS5vbWl0KEpvaW5lZCwgY29scyA9IFwiZGF5XCIsIFwibW9udGhcIiwgXCJ5ZWFyXCIsIFwiaG91clwiLCBcIkVUXCIsIFwiZGF0ZV90aW1lXCIsIFwid2Vla2RheVwiLCBcInBvbGx1dGFudHNcIiwgXCJ2YWx1ZVwiKVxuVUZPX0FpclFbIWNvbXBsZXRlLmNhc2VzKFVGT19BaXJRKSwgXVxuYGBgIn0= -->
+<pre class="r"><code>#Remove Missing Cases from Joined table
+UFO_AirQ &lt;- na.omit(Joined, cols = &quot;day&quot;, &quot;month&quot;, &quot;year&quot;, &quot;hour&quot;, &quot;ET&quot;, &quot;date_time&quot;, &quot;weekday&quot;, &quot;pollutants&quot;, &quot;value&quot;)
+UFO_AirQ[!complete.cases(UFO_AirQ), ]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImdyb3VwZWRfZGYiLCJ0YmxfZGYiLCJ0YmwiLCJkYXRhLmZyYW1lIl0sIm5jb2wiOjEyLCJucm93IjowfSwicmRmIjoiSDRzSUFBQUFBQUFBQnQyVlhXK2JNQlNHWFFpZ29MU3J0SnZlN1JjMENpWmZ1NXpTVGRxa3JWV1RhYm1iWE9JbXFNUkdZS2RyZjN3N0V6Z0h3cWFwMitXUWtCLzg5Wjd6K2ppNXZsaUcvdEluaE5pa1kxN2JNVWpjMlZWQVI1U1FqbVcranN4SXQyaC9tRm12RGZUTWUwcktwOVhheDJWN3NOQk4rSTRuZVRYckRXd1hBRkNBRUdBSU1BSVlBMHdBcGdCdks3Q0NBVktBUkpGQ3BDSFNDR21NTkVHYUlxRUdSUTJLR2hRMUtHcFExS0NvUVZHRG9nWkZEWW9hSVdxRVFjdEtKMHBZRGs2aXY3Y3NVakl6OUhSNEF0WnpOYk5YemJRL01RSDRnZDhBZm1ZWjRMczBxM3NmY0prV05TWTRWNjhCNXp3RnZJd1U0QmU1QTd6Z1VSbVQvZnpYMFhlcm1SMDZHQXdhSERTWU5qaHM4TERCb3dhUEd6eHA4UFNmb3p5RGVvUVEvOU1DZjRFL3BQTEhQcWw5cWt0WVBVckJXOHZ0cjR0WmEyZXJHdkt1THVjZmwxaFU3djVUL2VFZ1BDeGdpVlc3MEJ6d0cxOWg3MGJqYmNoaXJHV0dCVHczZGYrU2ZFL0xNRWdqMzE5VytDdW1XUDgyWTF2ZWNxU2J5ZnUrTVAxNWJkMmhaVEJZN0FkMzJadEpMVlFHZDlTWks2WWdTZmVhcitNNit4WGVaR2NyaGRwQXZUOXd2UGlkamRUQTF2c0ZSR1ppNXQ5VnZJV052WHZPNytydC9GUW1pVlpNcUJ3RWRpelJ2TFRsSUFkUHBzcUVaTEt3aXY4UXArWE9VZGJxZUtWRmtmWHFQTnBvY1hjK0xOVDJ3K1Z6L0J2dWxaSXVPTytBRzF5c1l3RXBPQW03NGZBYmRtS3MzNXZiVDdOWXdMbjdwamZ2SzZrWXpQTWptVUJQZWVSUFB3SGxLZ0FyT3djQUFBPT0ifQ== -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Country"],"name":[1],"type":["chr"],"align":["left"]},{"label":["State"],"name":[2],"type":["chr"],"align":["left"]},{"label":["Region"],"name":[3],"type":["chr"],"align":["left"]},{"label":["day"],"name":[4],"type":["fctr"],"align":["left"]},{"label":["month"],"name":[5],"type":["fctr"],"align":["left"]},{"label":["year"],"name":[6],"type":["fctr"],"align":["left"]},{"label":["hour"],"name":[7],"type":["fctr"],"align":["left"]},{"label":["ET"],"name":[8],"type":["int"],"align":["right"]},{"label":["date_time"],"name":[9],"type":["S3: POSIXct"],"align":["right"]},{"label":["weekday"],"name":[10],"type":["fctr"],"align":["left"]},{"label":["pollutants"],"name":[11],"type":["chr"],"align":["left"]},{"label":["value"],"name":[12],"type":["dbl"],"align":["right"]}],"data":[],"options":{"columns":{"min":{},"max":[10],"total":[12]},"rows":{"min":[10],"max":[10],"total":[0]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5rYWJsZShoZWFkKFVGT19BaXJRKSlcbmBgYCJ9 -->
+<pre class="r"><code>
+kable(head(UFO_AirQ))</code></pre>
+<!-- rnb-source-end -->
 
 <!-- rnb-html-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImtuaXRfYXNpcyJdLCJzaXppbmdQb2xpY3kiOltdfX0= -->
 
 <table>
 <thead>
 <tr class="header">
-<th align="left">state</th>
+<th align="left">Country</th>
+<th align="left">State</th>
+<th align="left">Region</th>
 <th align="left">day</th>
 <th align="left">month</th>
 <th align="left">year</th>
@@ -2525,76 +2381,88 @@ kable(head(AirQ_long))</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">az</td>
-<td align="left">7</td>
-<td align="left">Jul</td>
-<td align="left">2000</td>
-<td align="left">21</td>
-<td align="right">1</td>
-<td align="left">2000-07-07 21:00:00</td>
-<td align="left">Sat</td>
-<td align="left">NO2.Mean</td>
-<td align="right">7.375000</td>
-</tr>
-<tr class="even">
-<td align="left">az</td>
-<td align="left">7</td>
-<td align="left">Jul</td>
-<td align="left">2000</td>
-<td align="left">21</td>
-<td align="right">1</td>
-<td align="left">2000-07-07 21:00:00</td>
-<td align="left">Sat</td>
-<td align="left">NO2.Mean</td>
-<td align="right">7.375000</td>
-</tr>
-<tr class="odd">
-<td align="left">az</td>
-<td align="left">6</td>
+<td align="left">USA</td>
+<td align="left">va</td>
+<td align="left">South</td>
+<td align="left">10</td>
 <td align="left">Sep</td>
-<td align="left">2001</td>
-<td align="left">21</td>
+<td align="left">2006</td>
+<td align="left">22</td>
 <td align="right">1</td>
-<td align="left">2001-09-06 21:00:00</td>
-<td align="left">Fri</td>
-<td align="left">NO2.Mean</td>
-<td align="right">7.708333</td>
-</tr>
-<tr class="even">
-<td align="left">az</td>
-<td align="left">5</td>
-<td align="left">Jun</td>
-<td align="left">2005</td>
-<td align="left">21</td>
-<td align="right">1</td>
-<td align="left">2005-06-05 21:00:00</td>
+<td align="left">2006-09-10 22:00:00</td>
 <td align="left">Mon</td>
 <td align="left">NO2.Mean</td>
-<td align="right">7.916667</td>
-</tr>
-<tr class="odd">
-<td align="left">az</td>
-<td align="left">5</td>
-<td align="left">Oct</td>
-<td align="left">2007</td>
-<td align="left">2</td>
-<td align="right">1</td>
-<td align="left">2007-10-05 02:00:00</td>
-<td align="left">Sat</td>
-<td align="left">NO2.Mean</td>
-<td align="right">8.625000</td>
+<td align="right">5.208333</td>
 </tr>
 <tr class="even">
-<td align="left">az</td>
-<td align="left">5</td>
+<td align="left">USA</td>
+<td align="left">ky</td>
+<td align="left">South</td>
+<td align="left">9</td>
 <td align="left">Oct</td>
+<td align="left">2001</td>
+<td align="left">22</td>
+<td align="right">1</td>
+<td align="left">2001-10-09 22:00:00</td>
+<td align="left">Wed</td>
+<td align="left">NO2.Mean</td>
+<td align="right">20.347826</td>
+</tr>
+<tr class="odd">
+<td align="left">USA</td>
+<td align="left">ca</td>
+<td align="left">West</td>
+<td align="left">4</td>
+<td align="left">Jul</td>
 <td align="left">2007</td>
+<td align="left">22</td>
+<td align="right">1</td>
+<td align="left">2007-07-04 22:00:00</td>
+<td align="left">Thu</td>
+<td align="left">NO2.Mean</td>
+<td align="right">0.772727</td>
+</tr>
+<tr class="even">
+<td align="left">USA</td>
+<td align="left">ca</td>
+<td align="left">West</td>
+<td align="left">11</td>
+<td align="left">Jan</td>
+<td align="left">2005</td>
+<td align="left">17</td>
+<td align="right">1</td>
+<td align="left">2005-01-11 17:00:00</td>
+<td align="left">Wed</td>
+<td align="left">NO2.Mean</td>
+<td align="right">1.600000</td>
+</tr>
+<tr class="odd">
+<td align="left">USA</td>
+<td align="left">az</td>
+<td align="left">West</td>
+<td align="left">7</td>
+<td align="left">Jul</td>
+<td align="left">2000</td>
 <td align="left">21</td>
 <td align="right">1</td>
-<td align="left">2007-10-05 21:00:00</td>
+<td align="left">2000-07-07 21:00:00</td>
 <td align="left">Sat</td>
 <td align="left">NO2.Mean</td>
-<td align="right">8.625000</td>
+<td align="right">7.375000</td>
+</tr>
+<tr class="even">
+<td align="left">USA</td>
+<td align="left">ca</td>
+<td align="left">West</td>
+<td align="left">8</td>
+<td align="left">Jan</td>
+<td align="left">2005</td>
+<td align="left">22</td>
+<td align="right">1</td>
+<td align="left">2005-01-08 22:00:00</td>
+<td align="left">Sun</td>
+<td align="left">NO2.Mean</td>
+<td align="right">1.608696</td>
 </tr>
 </tbody>
 </table>
@@ -2605,10 +2473,14 @@ kable(head(AirQ_long))</code></pre>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQphdXRob3I6ICJBbHlzc2EgS25hcHAiDQpkYXRlOiAiMTIvMTAvMjAiIA0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KIyBGaW5hbCBQcm9qZWN0OiBVRk8gU2lnaHRpbmdzICYgVS5TLiBBaXIgUXVhbGl0eSANCg0KIyMgUmVzZWFyY2ggUXVlc3Rpb24NCg0KV2hlcmUgYXJlIFVGTyBzaWdodGluZ3MgaW4gdGhlIFVuaXRlZCBTdGF0ZXMgYXNzb2NpYXRlZCB3aXRoIHBvbGx1dGFudCBsZXZlbHMgb2YgY2FyYm9uIG1vbm94aWRlIChDTykgYW5kIG5pdHJvZ2VuIGRpb3hpZGUgKE5PMikgZnJvbSAyMDAwIHRvIDIwMDg/DQoNCg0KIyMgUHVycG9zZQ0KDQpUaGlzIHRvcGljIGlzIGltcG9ydGFudCB0byBpbnZlc3RpZ2F0ZSBiZWNhdXNlIHRoZXJlIGlzIGN1cnJlbnRseSB2ZXJ5IGxpdHRsZSBrbm93bGVkZ2Ugb2YgaG93IGNsaW1hdGUgaW5mb3JtYXRpb24gcmVsYXRlcyB0byBVRk8gc2lnaHRpbmdzLiBBaXIgcXVhbGl0eSwgaW4gcGFydGljdWxhciwgaXMgaW50ZXJlc3RpbmcgdG8gZXhwbG9yZSBiZWNhdXNlIGFpciBwb2xsdXRhbnRzIGNhbiBpbXBhaXIgdmlzaWJpbGl0eSwgd2hpY2ggbWF5IGFmZmVjdCB0aGUgYWJpbGl0eSBvZiBVRk9zIHRvIGJlIHNlZW4gaW4gdGhlIHNreS4gVGhpcyAicmVsYXRpb25zaGlwIiBpcyBleHBlY3RlZCB0byBiZWNvbWUgbW9yZSBwb2xhcml6ZWQgb3ZlciB0aW1lLCBhcyBhaXIgcXVhbGl0eSB3b3JzZW5zLiANCg0KDQojIyBEYXRhIEFjY2Vzcw0KDQpgYGB7ciwgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0V9DQpsaWJyYXJ5KG1vc2FpYykNCmxpYnJhcnkoZ2dwbG90MikNCmxpYnJhcnkodGlkeXZlcnNlKQ0KbGlicmFyeShkcGx5cikNCmxpYnJhcnkoa25pdHIpDQpsaWJyYXJ5KGx1YnJpZGF0ZSkNCmxpYnJhcnkocmVhZHhsKQ0KbGlicmFyeShEYXRhQ29tcHV0aW5nKQ0KYGBgDQoNCmBgYHtyfQ0Kcm0obGlzdD1scygpKQ0KYGBgDQoNCmBgYHtyfQ0KI0RhdGEgU2V0IDENClVGTyA8LSByZWFkX2V4Y2VsKCJVRk9zX2Nvb3JkLnhsc3giKQ0KYGBgDQoNCmBgYHtyfQ0KI0RhdGEgU2V0IDINCkFpclEgPC0gcmVhZC5jc3YoIlVGT1BPTExVVEFOVFMuY3N2IiwgaGVhZGVyID0gVFJVRSkNCmBgYA0KDQoNCiMjIEluc3BlY3RpbmcgRGF0YSBTZXRzDQoNCmBgYHtyfQ0KI0RhdGEgU2V0IDENCmthYmxlKGhlYWQoVUZPKSkNCmdsaW1wc2UoVUZPKQ0Kc3RyKFVGTykNCmBgYA0KDQpgYGB7cn0NCiNEYXRhIFNldCAyDQprYWJsZShoZWFkKEFpclEpKQ0KZ2xpbXBzZShBaXJRKQ0Kc3RyKEFpclEpDQpgYGANCg0KDQojIyBWYXJpYWJsZXMgVG8gQmUgVXNlZCAob3JpZ2luYWxseSBpbmNsdWRlZCBpbiBkYXRhIHNldHMpDQoNCkRhdGEgU2V0IDENCiogY291bnRyeTogd2lsbCBsaW1pdCB0byBvbmx5IGluY2x1ZGUgVVNBDQoqIHN0YXRlOiByZWNvcmRzIGRhdGEgZnJvbSBjZXJ0YWluIHN0YXRlcyANCg0KRGF0YSBTZXQgMiANCiogc3RhdGU6IHJlY29yZHMgZGF0YSBmcm9tIGNlcnRhaW4gc3RhdGVzDQoqIG1vbnRoOiBhbGwgMTIgbW9udGhzDQoqIHllYXI6IGNvbnRhaW5zIGRhdGEgZnJvbSAyMDAwIHRvIDIwMDgNCg0KKiBOTzIvQ08gTWVhbjogbWVhbiBjb25jZW50cmF0aW9uIHdpdGhpbiBhIGdpdmVuIGRheQ0KKiBOTzIvQ08gQVFJOiBBaXIgcXVhbGl0eSBpbmRleCB3aXRoaW4gYSBnaXZlbiBkYXkNCiogTk8yL0NPIDFzdCBNYXggVmFsdWU6IG1heGltdW0gdmFsdWUgb2J0YWluZWQgd2l0aGluIGEgZ2l2ZW4gZGF5DQoqIE5PMi9DTyAxc3QgTWF4IEhvdXI6IHRoZSBob3VyIHdoZW4gdGhlIG1heGltdW0gY29uY2VudHJhdGlvbiB3YXMgb2J0YWluZWQNCiogRVQ6IGVxdWFsIHRvIDEgaWYgYSBVRk8gd2FzIHNpZ2h0ZWQsIDAgb3RoZXJ3aXNlIChiaW5hcnkpDQoNCg0KIyMgRGF0YSBDbGVhbmluZyAmIFdyYW5nbGluZyBmb3IgRGF0YSBTZXQgMQ0KDQpgYGB7cn0NCiNMaW1pdGluZyB0byBVU0Egb25seQ0KVUZPX1VTIDwtIA0KICBVRk8gJT4lDQogIGZpbHRlcihDb3VudHJ5ID09ICJVU0EiKSANCmBgYA0KDQpgYGB7cn0NClVGT19VUyRTdGF0ZSA8LSB1bmxpc3QobGFwcGx5KFVGT19VUyRTdGF0ZSwgdG9sb3dlcikpDQpzdHIoVUZPX1VTKQ0KVmlldyhVRk9fVVMpDQpgYGANCg0KDQpgYGB7cn0NCiNDcmVhdGluZyBSZWdpb25zDQpVRk9fVVMgPC0gDQogIFVGT19VUyAlPiUNCiAgbXV0YXRlKFJlZ2lvbiA9IGlmZWxzZShTdGF0ZSAlaW4lIGMoIm1lIiwibmgiLCJ2dCIsInJpIiwiY3QiLCJueSIsInBhIiwibmoiKSwgIk5vcnRoZWFzdCIsDQogIGlmZWxzZShTdGF0ZSAlaW4lIGMoIndpIiwibWkiLCJpbCIsIm9oIiwibmQiLCJzZCIsIm5lIiwia3MiLCJtbiIsImlhIiwibW8iKSwiTWlkd2VzdCIsIGlmZWxzZShTdGF0ZSAlaW4lIGMoImRlIiwibWQiLCJ2YSIsInd2IiwibmMiLCJzYyIsImdhIiwiZmwiLCJreSIsIm1zIiwiYWwiLCJvayIsInR4IiwiYXIiLCJsYSIpLCAiU291dGgiLCAiV2VzdCIpKSkpDQoNClJlZ2lvbl9jb3VudCA8LSANCiAgVUZPX1VTICU+JQ0KICBncm91cF9ieShSZWdpb24pICU+JQ0KICBzdW1tYXJpc2UodG90YWwgPSBjb3VudChTdGF0ZSkpDQogIA0KUmVnaW9uX2NvdW50DQpgYGANCg0KDQojIyBEYXRhIFdyYW5nbGluZyBmb3IgRGF0YSBTZXQgMg0KDQpgYGB7cn0NCiNDb252ZXJ0aW5nIHZhcmlhYmxlIHR5cGVzDQpBaXJfUSA8LSANCiAgQWlyUSAlPiUgDQogIG11dGF0ZSh0aW1lID0gbWFrZV9kYXRldGltZSh5ZWFyLCBtb250aCwgZGF5LCBob3VyKSwNCiAgZGF5ID0gZmFjdG9yKGRheSh0aW1lKSksDQogIG1vbnRoID0gZmFjdG9yKG1vbnRoKHRpbWUpKSwNCiAgeWVhciA9IGZhY3Rvcih5ZWFyKHRpbWUpKSwNCiAgd2Vla2RheSA9IGZhY3Rvcih3ZGF5KHRpbWUpKSwNCiAgaG91ciA9IGZhY3Rvcihob3VyKHRpbWUpKSwNCiAgZGF0ZSA9IGFzLkRhdGUodGltZSkpDQoNCm5hbWVzKEFpcl9RKVtuYW1lcyhBaXJfUSkgPT0gInRpbWUiXSA8LSAiZGF0ZV90aW1lIg0KDQojImRhdGUiIHZhcmlhYmxlIGlzIG5vdCBuZWVkZWQgc2luY2UgImRhdGVfdGltZSIgY29udGFpbnMgdGhlIGRhdGUgJiB0aW1lDQpBaXJfUSRkYXRlIDwtIE5VTEwNCg0Ka2FibGUoaGVhZChBaXJfUSkpDQpgYGANCg0KYGBge3J9DQojRmlsdGVyIHRvIG9ubHkgaW5jbHVkZSBVRk8gc2lnaHRpbmdzDQpBaXJfUSA8LSANCiAgQWlyX1EgJT4lDQogIGZpbHRlcihFVCA9PSAxKQ0KICANCiNBZGQgbGFiZWxzDQpBaXJfUSRtb250aCA8LSBmYWN0b3IoQWlyX1EkbW9udGgsIGxhYmVscyA9IGMoIkphbiIsICJGZWIiLCAiTWFyIiwgIkFwciIsICJNYXkiLCAiSnVuIiwgIkp1bCIsICJBdWciLCAiU2VwIiwiT2N0IiwgIk5vdiIsICJEZWMiKSkNCkFpcl9RJHdlZWtkYXkgPC0gZmFjdG9yKEFpcl9RJHdlZWtkYXksbGFiZWxzID0gYygiTW9uIiwgIlR1ZSIsICJXZWQiLCAiVGh1IiwgIkZyaSIsICJTYXQiLCAiU3VuIikpDQpzdHIoQWlyX1EpDQpgYGANCg0KDQpgYGB7cn0NCiNHYXRoZXIgcG9sbHV0YW50cw0KQWlyUV9sb25nIDwtDQogIEFpcl9RICU+JQ0KICBnYXRoZXIoa2V5ID0gcG9sbHV0YW50cywgdmFsdWUgPSB2YWx1ZSwgTk8yLk1lYW46Q08uQVFJKQ0KDQprYWJsZShoZWFkKEFpclFfbG9uZykpDQpgYGANCg0KDQoNCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQphdXRob3I6ICJBbHlzc2EgS25hcHAiDQpkYXRlOiAiMTIvMTAvMjAiIA0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KIyBGaW5hbCBQcm9qZWN0OiBVRk8gU2lnaHRpbmdzICYgVS5TLiBBaXIgUXVhbGl0eSANCg0KIyMgUmVzZWFyY2ggUXVlc3Rpb24NCg0KV2hlcmUgYXJlIFVGTyBzaWdodGluZ3MgaW4gdGhlIFVuaXRlZCBTdGF0ZXMgYXNzb2NpYXRlZCB3aXRoIHBvbGx1dGFudCBsZXZlbHMgb2YgY2FyYm9uIG1vbm94aWRlIChDTykgYW5kIG5pdHJvZ2VuIGRpb3hpZGUgKE5PMikgZnJvbSAyMDAwIHRvIDIwMDg/DQoNCg0KIyMgUHVycG9zZQ0KDQpUaGlzIHRvcGljIGlzIGltcG9ydGFudCB0byBpbnZlc3RpZ2F0ZSBiZWNhdXNlIHRoZXJlIGlzIGN1cnJlbnRseSB2ZXJ5IGxpdHRsZSBrbm93bGVkZ2Ugb2YgaG93IGNsaW1hdGUgaW5mb3JtYXRpb24gcmVsYXRlcyB0byBVRk8gc2lnaHRpbmdzLiBBaXIgcXVhbGl0eSwgaW4gcGFydGljdWxhciwgaXMgaW50ZXJlc3RpbmcgdG8gZXhwbG9yZSBiZWNhdXNlIGFpciBwb2xsdXRhbnRzIGNhbiBpbXBhaXIgdmlzaWJpbGl0eSwgd2hpY2ggbWF5IGFmZmVjdCB0aGUgYWJpbGl0eSBvZiBVRk9zIHRvIGJlIHNlZW4gaW4gdGhlIHNreS4gVGhpcyAicmVsYXRpb25zaGlwIiBpcyBleHBlY3RlZCB0byBiZWNvbWUgbW9yZSBwb2xhcml6ZWQgb3ZlciB0aW1lLCBhcyBhaXIgcXVhbGl0eSB3b3JzZW5zLiANCg0KDQojIyBEYXRhIEFjY2Vzcw0KDQpgYGB7ciwgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0V9DQpsaWJyYXJ5KG1vc2FpYykNCmxpYnJhcnkoZ2dwbG90MikNCmxpYnJhcnkodGlkeXZlcnNlKQ0KbGlicmFyeShkcGx5cikNCmxpYnJhcnkoa25pdHIpDQpsaWJyYXJ5KGx1YnJpZGF0ZSkNCmxpYnJhcnkocmVhZHhsKQ0KbGlicmFyeShEYXRhQ29tcHV0aW5nKQ0KYGBgDQoNCmBgYHtyfQ0Kcm0obGlzdD1scygpKQ0KYGBgDQoNCmBgYHtyfQ0KI0RhdGEgU2V0IDENClVGTyA8LSByZWFkX2V4Y2VsKCJVRk9zX2Nvb3JkLnhsc3giKQ0KYGBgDQoNCmBgYHtyfQ0KI0RhdGEgU2V0IDINCkFpclEgPC0gcmVhZC5jc3YoIlVGT1BPTExVVEFOVFMuY3N2IiwgaGVhZGVyID0gVFJVRSkNCmBgYA0KDQoNCiMjIEluc3BlY3RpbmcgRGF0YSBTZXRzDQoNCmBgYHtyfQ0KI0RhdGEgU2V0IDENCmthYmxlKGhlYWQoVUZPKSkNCmdsaW1wc2UoVUZPKQ0Kc3RyKFVGTykNCmBgYA0KDQpgYGB7cn0NCiNEYXRhIFNldCAyDQprYWJsZShoZWFkKEFpclEpKQ0KZ2xpbXBzZShBaXJRKQ0Kc3RyKEFpclEpDQpgYGANCg0KDQojIyBWYXJpYWJsZXMgVG8gQmUgVXNlZCAob3JpZ2luYWxseSBpbmNsdWRlZCBpbiBkYXRhIHNldHMpDQoNCkRhdGEgU2V0IDENCiogY291bnRyeTogd2lsbCBsaW1pdCB0byBvbmx5IGluY2x1ZGUgVVNBDQoqIHN0YXRlOiByZWNvcmRzIGRhdGEgZnJvbSBjZXJ0YWluIHN0YXRlcyANCg0KRGF0YSBTZXQgMiANCiogc3RhdGU6IHJlY29yZHMgZGF0YSBmcm9tIGNlcnRhaW4gc3RhdGVzDQoqIG1vbnRoOiBhbGwgMTIgbW9udGhzDQoqIHllYXI6IGNvbnRhaW5zIGRhdGEgZnJvbSAyMDAwIHRvIDIwMDgNCg0KKiBOTzIvQ08gTWVhbjogbWVhbiBjb25jZW50cmF0aW9uIHdpdGhpbiBhIGdpdmVuIGRheQ0KKiBOTzIvQ08gQVFJOiBBaXIgcXVhbGl0eSBpbmRleCB3aXRoaW4gYSBnaXZlbiBkYXkNCiogTk8yL0NPIDFzdCBNYXggVmFsdWU6IG1heGltdW0gdmFsdWUgb2J0YWluZWQgd2l0aGluIGEgZ2l2ZW4gZGF5DQoqIE5PMi9DTyAxc3QgTWF4IEhvdXI6IHRoZSBob3VyIHdoZW4gdGhlIG1heGltdW0gY29uY2VudHJhdGlvbiB3YXMgb2J0YWluZWQNCiogRVQ6IGVxdWFsIHRvIDEgaWYgYSBVRk8gd2FzIHNpZ2h0ZWQsIDAgb3RoZXJ3aXNlIChiaW5hcnkpDQoNCg0KIyMgRGF0YSBDbGVhbmluZyAmIFdyYW5nbGluZyBmb3IgRGF0YSBTZXQgMQ0KDQpgYGB7ciwgd2FybmluZyA9IEZBTFNFLCBtZXNzYWdlID0gRkFMU0V9DQojTGltaXRpbmcgdG8gVVNBIG9ubHkNClVGT19VUyA8LSANCiAgVUZPICU+JQ0KICBmaWx0ZXIoQ291bnRyeSA9PSAiVVNBIikgDQoNCnN0cihVRk9fVVMpDQpgYGANCg0KDQpgYGB7ciwgd2FybmluZyA9IEZBTFNFLCBtZXNzYWdlID0gRkFMU0V9DQojQ3JlYXRpbmcgUmVnaW9ucw0KVUZPX1VTIDwtIA0KICBVRk9fVVMgJT4lDQogIG11dGF0ZShSZWdpb24gPSBpZmVsc2UoU3RhdGUgJWluJSBjKCJtZSIsIm5oIiwidnQiLCJyaSIsImN0IiwibnkiLCJwYSIsIm5qIiksICJOb3J0aGVhc3QiLA0KICBpZmVsc2UoU3RhdGUgJWluJSBjKCJ3aSIsIm1pIiwiaWwiLCJvaCIsIm5kIiwic2QiLCJuZSIsImtzIiwibW4iLCJpYSIsIm1vIiksIk1pZHdlc3QiLCBpZmVsc2UoU3RhdGUgJWluJSBjKCJkZSIsIm1kIiwidmEiLCJ3diIsIm5jIiwic2MiLCJnYSIsImZsIiwia3kiLCJtcyIsImFsIiwib2siLCJ0eCIsImFyIiwibGEiKSwgIlNvdXRoIiwgIldlc3QiKSkpKQ0KDQpSZWdpb25fY291bnQgPC0gDQogIFVGT19VUyAlPiUNCiAgZ3JvdXBfYnkoUmVnaW9uKSAlPiUNCiAgc3VtbWFyaXNlKHRvdGFsID0gY291bnQoU3RhdGUpKQ0KICANClJlZ2lvbl9jb3VudA0KYGBgDQoNCg0KIyMgRGF0YSBXcmFuZ2xpbmcgZm9yIERhdGEgU2V0IDINCg0KYGBge3IsIHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFfQ0KI0NvbnZlcnRpbmcgdmFyaWFibGUgdHlwZXMNCkFpcl9RIDwtIA0KICBBaXJRICU+JSANCiAgbXV0YXRlKHRpbWUgPSBtYWtlX2RhdGV0aW1lKHllYXIsIG1vbnRoLCBkYXksIGhvdXIpLA0KICBkYXkgPSBmYWN0b3IoZGF5KHRpbWUpKSwNCiAgbW9udGggPSBmYWN0b3IobW9udGgodGltZSkpLA0KICB5ZWFyID0gZmFjdG9yKHllYXIodGltZSkpLA0KICB3ZWVrZGF5ID0gZmFjdG9yKHdkYXkodGltZSkpLA0KICBob3VyID0gZmFjdG9yKGhvdXIodGltZSkpLA0KICBkYXRlID0gYXMuRGF0ZSh0aW1lKSkNCg0KbmFtZXMoQWlyX1EpW25hbWVzKEFpcl9RKSA9PSAidGltZSJdIDwtICJkYXRlX3RpbWUiDQoNCiMiZGF0ZSIgdmFyaWFibGUgaXMgbm90IG5lZWRlZCBzaW5jZSAiZGF0ZV90aW1lIiBjb250YWlucyB0aGUgZGF0ZSAmIHRpbWUNCkFpcl9RJGRhdGUgPC0gTlVMTA0KDQprYWJsZShoZWFkKEFpcl9RKSkNCmBgYA0KDQpgYGB7ciwgd2FybmluZyA9IEZBTFNFLCBtZXNzYWdlID0gRkFMU0V9DQojRmlsdGVyIHRvIG9ubHkgaW5jbHVkZSBVRk8gc2lnaHRpbmdzDQpBaXJfUSA8LSANCiAgQWlyX1EgJT4lDQogIGZpbHRlcihFVCA9PSAxKQ0KICANCiNBZGQgbGFiZWxzDQpBaXJfUSRtb250aCA8LSBmYWN0b3IoQWlyX1EkbW9udGgsIGxhYmVscyA9IGMoIkphbiIsICJGZWIiLCAiTWFyIiwgIkFwciIsICJNYXkiLCAiSnVuIiwgIkp1bCIsICJBdWciLCAiU2VwIiwiT2N0IiwgIk5vdiIsICJEZWMiKSkNCkFpcl9RJHdlZWtkYXkgPC0gZmFjdG9yKEFpcl9RJHdlZWtkYXksbGFiZWxzID0gYygiTW9uIiwgIlR1ZSIsICJXZWQiLCAiVGh1IiwgIkZyaSIsICJTYXQiLCAiU3VuIikpDQpzdHIoQWlyX1EpDQpgYGANCg0KDQpgYGB7ciwgd2FybmluZyA9IEZBTFNFLCBtZXNzYWdlID0gRkFMU0V9DQojR2F0aGVyIHBvbGx1dGFudHMNCkFpclFfbG9uZyA8LQ0KICBBaXJfUSAlPiUNCiAgZ2F0aGVyKGtleSA9IHBvbGx1dGFudHMsIHZhbHVlID0gdmFsdWUsIE5PMi5NZWFuOkNPLkFRSSkNCg0Ka2FibGUoaGVhZChBaXJRX2xvbmcpKQ0KYGBgDQoNCg0KDQojIyBKb2luaW5nIHRoZSAyIERhdGEgU2V0cw0KDQpgYGB7ciwgd2FybmluZyA9IEZBTFNFLCBtZXNzYWdlID0gRkFMU0V9DQpVRk9fVVMkU3RhdGUgPC0gdW5saXN0KGxhcHBseShVRk9fVVMkU3RhdGUsIHRvbG93ZXIpKQ0KDQpKb2luIDwtIGxlZnRfam9pbihVRk9fVVMgJT4lIGdyb3VwX2J5KFN0YXRlKSAlPiUgbXV0YXRlKGlkID0gcm93X251bWJlcigpKSwgDQogICAgICAgICAgICAgICAgICAgIEFpclFfbG9uZyAlPiUgZ3JvdXBfYnkoc3RhdGUpICU+JSBtdXRhdGUoaWQgPSByb3dfbnVtYmVyKCkpLCANCiAgICAgICAgICAgICAgICAgICAgYnkgPSBjKCJTdGF0ZSIgPSAic3RhdGUiLCAiaWQiKSkNCg0KI1NlbGVjdCBvbmx5IGNvcnJlc3BvbmRpbmcgdmFyaWFibGVzDQpKb2luZWQgPC0gDQogIEpvaW4gJT4lDQogIHNlbGVjdChDb3VudHJ5LCBTdGF0ZSwgUmVnaW9uLCBkYXksIG1vbnRoLCB5ZWFyLCBob3VyLCBFVCwgZGF0ZV90aW1lLCB3ZWVrZGF5LCBwb2xsdXRhbnRzLCB2YWx1ZSkNCmBgYA0KDQpgYGB7ciwgd2FybmluZyA9IEZBTFNFLCBtZXNzYWdlID0gRkFMU0V9DQojUmVtb3ZlIE1pc3NpbmcgQ2FzZXMgZnJvbSBKb2luZWQgdGFibGUNClVGT19BaXJRIDwtIG5hLm9taXQoSm9pbmVkLCBjb2xzID0gImRheSIsICJtb250aCIsICJ5ZWFyIiwgImhvdXIiLCAiRVQiLCAiZGF0ZV90aW1lIiwgIndlZWtkYXkiLCAicG9sbHV0YW50cyIsICJ2YWx1ZSIpDQpVRk9fQWlyUVshY29tcGxldGUuY2FzZXMoVUZPX0FpclEpLCBdDQoNCmthYmxlKGhlYWQoVUZPX0FpclEpKQ0KYGBgDQoNCmBgYHtyfQ0KDQpgYGANCg0KDQo=</div>
 
 
 

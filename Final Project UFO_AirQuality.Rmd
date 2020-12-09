@@ -82,21 +82,17 @@ Data Set 2
 
 ## Data Cleaning & Wrangling for Data Set 1
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 #Limiting to USA only
 UFO_US <- 
   UFO %>%
   filter(Country == "USA") 
-```
 
-```{r}
-UFO_US$State <- unlist(lapply(UFO_US$State, tolower))
 str(UFO_US)
-View(UFO_US)
 ```
 
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 #Creating Regions
 UFO_US <- 
   UFO_US %>%
@@ -114,7 +110,7 @@ Region_count
 
 ## Data Wrangling for Data Set 2
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 #Converting variable types
 Air_Q <- 
   AirQ %>% 
@@ -134,7 +130,7 @@ Air_Q$date <- NULL
 kable(head(Air_Q))
 ```
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 #Filter to only include UFO sightings
 Air_Q <- 
   Air_Q %>%
@@ -147,7 +143,7 @@ str(Air_Q)
 ```
 
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 #Gather pollutants
 AirQ_long <-
   Air_Q %>%
@@ -157,5 +153,32 @@ kable(head(AirQ_long))
 ```
 
 
+
+## Joining the 2 Data Sets
+
+```{r, warning = FALSE, message = FALSE}
+UFO_US$State <- unlist(lapply(UFO_US$State, tolower))
+
+Join <- left_join(UFO_US %>% group_by(State) %>% mutate(id = row_number()), 
+                    AirQ_long %>% group_by(state) %>% mutate(id = row_number()), 
+                    by = c("State" = "state", "id"))
+
+#Select only corresponding variables
+Joined <- 
+  Join %>%
+  select(Country, State, Region, day, month, year, hour, ET, date_time, weekday, pollutants, value)
+```
+
+```{r, warning = FALSE, message = FALSE}
+#Remove Missing Cases from Joined table
+UFO_AirQ <- na.omit(Joined, cols = "day", "month", "year", "hour", "ET", "date_time", "weekday", "pollutants", "value")
+UFO_AirQ[!complete.cases(UFO_AirQ), ]
+
+kable(head(UFO_AirQ))
+```
+
+```{r}
+
+```
 
 
