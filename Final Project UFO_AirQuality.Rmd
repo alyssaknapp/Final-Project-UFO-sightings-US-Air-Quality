@@ -65,7 +65,7 @@ str(AirQ)
 ## Variables To Be Used (originally included in data sets)
 
 Data Set 1
-* country: limited only to USA
+* country: will limit to only include USA
 * state: records data from certain states 
 
 Data Set 2 
@@ -80,7 +80,82 @@ Data Set 2
 * ET: equal to 1 if a UFO was sighted, 0 otherwise (binary)
 
 
-##
+## Data Cleaning & Wrangling for Data Set 1
+
+```{r}
+#Limiting to USA only
+UFO_US <- 
+  UFO %>%
+  filter(Country == "USA") 
+```
+
+```{r}
+UFO_US$State <- unlist(lapply(UFO_US$State, tolower))
+str(UFO_US)
+View(UFO_US)
+```
+
+
+```{r}
+#Creating Regions
+UFO_US <- 
+  UFO_US %>%
+  mutate(Region = ifelse(State %in% c("me","nh","vt","ri","ct","ny","pa","nj"), "Northeast",
+  ifelse(State %in% c("wi","mi","il","oh","nd","sd","ne","ks","mn","ia","mo"),"Midwest", ifelse(State %in% c("de","md","va","wv","nc","sc","ga","fl","ky","ms","al","ok","tx","ar","la"), "South", "West"))))
+
+Region_count <- 
+  UFO_US %>%
+  group_by(Region) %>%
+  summarise(total = count(State))
+  
+Region_count
+```
+
+
+## Data Wrangling for Data Set 2
+
+```{r}
+#Converting variable types
+Air_Q <- 
+  AirQ %>% 
+  mutate(time = make_datetime(year, month, day, hour),
+  day = factor(day(time)),
+  month = factor(month(time)),
+  year = factor(year(time)),
+  weekday = factor(wday(time)),
+  hour = factor(hour(time)),
+  date = as.Date(time))
+
+names(Air_Q)[names(Air_Q) == "time"] <- "date_time"
+
+#"date" variable is not needed since "date_time" contains the date & time
+Air_Q$date <- NULL
+
+kable(head(Air_Q))
+```
+
+```{r}
+#Filter to only include UFO sightings
+Air_Q <- 
+  Air_Q %>%
+  filter(ET == 1)
+  
+#Add labels
+Air_Q$month <- factor(Air_Q$month, labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep","Oct", "Nov", "Dec"))
+Air_Q$weekday <- factor(Air_Q$weekday,labels = c("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"))
+str(Air_Q)
+```
+
+
+```{r}
+#Gather pollutants
+AirQ_long <-
+  Air_Q %>%
+  gather(key = pollutants, value = value, NO2.Mean:CO.AQI)
+
+kable(head(AirQ_long))
+```
+
 
 
 
