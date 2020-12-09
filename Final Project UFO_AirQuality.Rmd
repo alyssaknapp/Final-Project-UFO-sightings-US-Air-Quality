@@ -426,7 +426,7 @@ CO_smooth
 NO2_CO <- 
   rbind(NO2_capital, CO_capital)
   
-View(NO2_CO)
+kable(head(NO2_CO))
 ```
 
 ```{r, fig.width = 10}
