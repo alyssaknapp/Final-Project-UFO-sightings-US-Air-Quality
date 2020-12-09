@@ -45,6 +45,42 @@ AirQ <- read.csv("UFOPOLLUTANTS.csv", header = TRUE)
 ```
 
 
+## Inspecting Data Sets
+
+```{r}
+#Data Set 1
+kable(head(UFO))
+glimpse(UFO)
+str(UFO)
+```
+
+```{r}
+#Data Set 2
+kable(head(AirQ))
+glimpse(AirQ)
+str(AirQ)
+```
+
+
+## Variables To Be Used (originally included in data sets)
+
+Data Set 1
+* country: limited only to USA
+* state: records data from certain states 
+
+Data Set 2 
+* state: records data from certain states
+* month: all 12 months
+* year: contains data from 2000 to 2008
+
+* NO2/CO Mean: mean concentration within a given day
+* NO2/CO AQI: Air quality index within a given day
+* NO2/CO 1st Max Value: maximum value obtained within a given day
+* NO2/CO 1st Max Hour: the hour when the maximum concentration was obtained
+* ET: equal to 1 if a UFO was sighted, 0 otherwise (binary)
+
+
+##
 
 
 
