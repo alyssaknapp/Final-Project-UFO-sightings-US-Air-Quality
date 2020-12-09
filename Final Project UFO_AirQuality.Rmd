@@ -17,3 +17,34 @@ Where are UFO sightings in the United States associated with pollutant levels of
 This topic is important to investigate because there is currently very little knowledge of how climate information relates to UFO sightings. Air quality, in particular, is interesting to explore because air pollutants can impair visibility, which may affect the ability of UFOs to be seen in the sky. This "relationship" is expected to become more polarized over time, as air quality worsens. 
 
 
+## Data Access
+
+```{r, message = FALSE, warning = FALSE}
+library(mosaic)
+library(ggplot2)
+library(tidyverse)
+library(dplyr)
+library(knitr)
+library(lubridate)
+library(readxl)
+library(DataComputing)
+```
+
+```{r}
+rm(list=ls())
+```
+
+```{r}
+#Data Set 1
+UFO <- read_excel("UFOs_coord.xlsx")
+```
+
+```{r}
+#Data Set 2
+AirQ <- read.csv("UFOPOLLUTANTS.csv", header = TRUE)
+```
+
+
+
+
+
