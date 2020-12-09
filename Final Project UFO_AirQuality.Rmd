@@ -7,6 +7,10 @@ output: html_notebook
 
 # Final Project: UFO Sightings & U.S. Air Quality 
 
+## Link to GitHub
+
+
+
 ## Research Question
 
 Where are UFO sightings in the United States associated with pollutant levels of carbon monoxide (CO) and nitrogen dioxide (NO2) from 2000 to 2008?
@@ -19,7 +23,7 @@ This topic is important to investigate because there is currently very little kn
 
 ## Data Access
 
-```{r, message = FALSE, warning = FALSE}
+```{r, warning = FALSE, message = FALSE}
 library(mosaic)
 library(ggplot2)
 library(tidyverse)
@@ -34,12 +38,12 @@ library(DataComputing)
 rm(list=ls())
 ```
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 #Data Set 1
 UFO <- read_excel("UFOs_coord.xlsx")
 ```
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 #Data Set 2
 AirQ <- read.csv("UFOPOLLUTANTS.csv", header = TRUE)
 ```
@@ -47,14 +51,14 @@ AirQ <- read.csv("UFOPOLLUTANTS.csv", header = TRUE)
 
 ## Inspecting Data Sets
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 #Data Set 1
 kable(head(UFO))
 glimpse(UFO)
 str(UFO)
 ```
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
 #Data Set 2
 kable(head(AirQ))
 glimpse(AirQ)
@@ -177,8 +181,150 @@ UFO_AirQ[!complete.cases(UFO_AirQ), ]
 kable(head(UFO_AirQ))
 ```
 
-```{r}
+```{r, warning = FALSE, message = FALSE}
+NO2 <- 
+  UFO_AirQ %>%
+  filter(pollutants %in% c('NO2.Mean', 'NO2.1st.Max.Value', 'NO2.1st.Max.Hour', 'NO2.AQI')) %>%
+  select(pollutants, date_time, year, month, weekday, hour, value, Region, State, ET)
 
+NO2$value <- as.integer(as.factor(NO2$value))
+str(NO2)
 ```
+
+```{r, warning = FALSE, message = FALSE}
+CO <- 
+  UFO_AirQ %>%
+  filter(pollutants %in% c('CO.Mean', 'CO.1st.Max.Value', 'CO.1st.Max.Hour', 'CO.AQI')) %>%
+  select(pollutants, date_time, year, month, weekday, hour, value, Region, State, ET)
+
+CO$value <- as.integer(as.factor(CO$value))
+str(CO)
+```
+
+
+```{r, warning = FALSE, message = FALSE}
+#Capitalizing important variables: Pollutants, States & Regions
+
+NO2_capital <-
+  data.frame(lapply(NO2,function(v){
+  if (is.character(v)) return(toupper(v))
+  else return(v)
+}))
+
+CO_capital <-
+  data.frame(lapply(CO,function(v){
+  if (is.character(v)) return(toupper(v))
+  else return(v)
+}))
+
+NO2_capital
+CO_capital
+```
+
+
+## Exploring Data 
+
+```{r, warning = FALSE, message = FALSE}
+#Find Mean for NO2
+total <- NULL
+mean_NO2 <- NULL
+for(i in 1:length(NO2_capital$value)) {
+  total <- sum(total, NO2_capital$value[i])
+}
+mean_NO2 <- total/length(NO2_capital$value)
+
+mean_NO2
+```
+
+
+```{r, warning = FALSE, message = FALSE}
+#Find Mean for CO
+total <- NULL
+mean_CO <- NULL
+for(i in 1:length(CO_capital$value)) {
+  total <- sum(total, CO_capital$value[i])
+}
+mean_CO <- total/length(CO_capital$value)
+
+mean_CO
+```
+
+```{r, warning = FALSE, message = FALSE}
+min(NO2_capital$value)
+max(NO2_capital$value)
+median(NO2_capital$value)
+
+min(CO_capital$value)
+max(CO_capital$value)
+median(CO_capital$value)
+```
+
+
+
+```{r, warning = FALSE, message = FALSE}
+#Pollutant measurements for each region
+Regions_NO2 <-
+  NO2_capital %>%
+  group_by(Region) %>%
+  summarise(count1 = sum(value)) %>%
+  arrange(desc(count1))
+
+Regions_CO <-
+  CO_capital %>%
+  group_by(Region) %>%
+  summarise(count2 = sum(value)) %>%
+  arrange(desc(count2))
+
+Regions_NO2
+Regions_CO
+```
+
+```{r, warning = FALSE, message = FALSE}
+#Pollutant measurements for recorded states
+State_NO2 <- 
+  NO2_capital %>%
+  group_by(State) %>%
+  summarise(count1 = sum(value)) %>%
+  arrange(desc(count1))
+
+State_CO <- 
+  CO_capital %>%
+  group_by(State) %>%
+  summarise(count2 = sum(value)) %>%
+  arrange(desc(count2))
+
+State_NO2
+State_CO
+```
+
+```{r, warning = FALSE, message = FALSE}
+#UFO sightings for the years 2000 to 2008
+Year_NO2 <-
+  NO2_capital %>%
+  group_by(year) %>%
+  summarise(UFOs_1 = count(ET)) %>%
+  arrange(desc(UFOs_1))
+
+Year_CO <- 
+  CO_capital %>%
+  group_by(year) %>%
+  summarise(UFOs_2 = count(ET)) %>%
+  arrange(desc(UFOs_2))
+
+Year_NO2
+Year_CO
+```
+
+
+## Data Visualization
+
+
+
+
+
+
+
+
+
 
 
