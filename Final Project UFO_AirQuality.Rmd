@@ -1,0 +1,19 @@
+---
+title: "R Notebook"
+author: "Alyssa Knapp"
+date: "12/10/20" 
+output: html_notebook
+---
+
+# Final Project: UFO Sightings & U.S. Air Quality 
+
+## Research Question
+
+Where are UFO sightings in the United States associated with pollutant levels of carbon monoxide (CO) and nitrogen dioxide (NO2) from 2000 to 2008?
+
+
+## Purpose
+
+This topic is important to investigate because there is currently very little knowledge of how climate information relates to UFO sightings. Air quality, in particular, is interesting to explore because air pollutants can impair visibility, which may affect the ability of UFOs to be seen in the sky. This "relationship" is expected to become more polarized over time, as air quality worsens. 
+
+
