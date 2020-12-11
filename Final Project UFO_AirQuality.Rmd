@@ -32,6 +32,8 @@ library(knitr)
 library(lubridate)
 library(readxl)
 library(DataComputing)
+library(plotly)
+library(sf)
 ```
 
 ```{r}
@@ -203,7 +205,6 @@ str(CO)
 
 ```{r, warning = FALSE, message = FALSE}
 #Capitalizing important variables: Pollutants, States & Regions
-
 NO2_capital <-
   data.frame(lapply(NO2,function(v){
   if (is.character(v)) return(toupper(v))
@@ -367,6 +368,26 @@ NO2_smooth <-
 NO2_smooth
 ```
 
+```{r, warning = FALSE, message = FALSE}
+NO2_gradient <- 
+  NO2_capital %>%
+  filter(pollutants!="NO2.AQI") %>%
+  ggplot(aes(x = month, y = year, fill = value)) + 
+  geom_tile(color = "white") + scale_fill_gradient(low ="blue", high ="green") + ggtitle("NO2 Mean")
+
+NO2_gradient
+```
+
+```{r, warning = FALSE, message = FALSE}
+NO2_gradient2 <- 
+  NO2_capital %>%
+  filter(pollutants!="NO2.Mean") %>%
+  ggplot(aes(x = month, y = year, fill = value)) + 
+  geom_tile(colour = "white") + scale_fill_gradient(low ="blue", high ="green") + ggtitle("NO2 AQI")
+
+NO2_gradient2
+```
+
 
 
 ## For CO
@@ -381,6 +402,7 @@ CO_years <-
 
 CO_years
 ```
+
 
 ```{r, warning = FALSE, message = FALSE}
 CO_boxplot <-
@@ -417,27 +439,65 @@ CO_smooth <-
 CO_smooth
 ```
 
+```{r, warning = FALSE, message = FALSE}
+CO_gradient <- 
+  CO_capital %>%
+  filter(pollutants!="CO.AQI") %>%
+  ggplot(aes(x = month, y = year, fill = value)) + 
+  geom_tile(color = "white") + scale_fill_gradient(low ="blue", high ="green") + ggtitle("CO Mean")
+
+CO_gradient
+```
+
+```{r, warning = FALSE, message = FALSE}
+CO_gradient2 <- 
+  CO_capital %>%
+  filter(pollutants!="CO Mean") %>%
+  ggplot(aes(x = month, y = year, fill = value)) + 
+  geom_tile(color = "white") + scale_fill_gradient(low ="blue", high ="green") + ggtitle("CO AQI")
+
+CO_gradient2
+```
+
 
 
 ## For NO2 & CO
 
 ```{r, warning = FALSE, message = FALSE}
-#Combiing NO2 & CO data frames
+#Combining NO2 & CO data frames
 NO2_CO <- 
   rbind(NO2_capital, CO_capital)
   
 kable(head(NO2_CO))
 ```
 
+```{r}
+ggplot(NO2_CO, aes(value, color = pollutants)) + 
+  geom_freqpoly(aes(y = ..density..), binwidth = 500)
+```
+
+
+```{r, warning = FALSE, message = FALSE, fig.width = 10}
+Pollutant_dist <-
+  NO2_CO %>%
+  ggplot(aes(y = value, x = pollutants)) +
+  geom_boxplot(aes(fill = Region)) +
+  geom_jitter() + 
+  ggtitle("Distribution of NO2 & CO values in U.S. regions")
+
+Pollutant_dist
+```
+
+
 ```{r, fig.width = 10}
-Pollutants_Regions <- ggplot(data=NO2_CO,aes(x=year,y=value ,fill=Region))+geom_bar(stat='identity',position='stack', width=.9)+ facet_wrap(~pollutants,ncol=3) + ggtitle("NO2 & CO pollutant levels in U.S. regions over time") + theme(axis.text.x = element_text(angle = 60, hjust = 1))
+Pollutants_Regions <- ggplot(data = NO2_CO, aes(x = year,y = value, fill = Region)) + geom_bar(stat ='identity', position ='stack', width =.9)+ facet_wrap(~pollutants, ncol = 3) + ggtitle("NO2 & CO pollutant levels in U.S. regions over time") + theme(axis.text.x = element_text(angle = 60, hjust = 1))
 
 Pollutants_Regions
 ```
 
 
 ```{r, fig.height = 8, fig.width = 10}
-Pollutants_States <- ggplot(data=NO2_CO,aes(x=year,y=value ,fill=pollutants))+geom_bar(stat='identity',position='dodge', width=.9)+ facet_wrap(~State,ncol=3) + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + ggtitle("NO2 & CO pollutant levels in U.S. states over time")
+Pollutants_States <- ggplot(data = NO2_CO, aes(x = year, y = value, fill = pollutants)) + geom_bar(stat ='identity', position ='dodge', width =.9)+ facet_wrap(~State, ncol = 3) + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + ggtitle("NO2 & CO pollutant levels in U.S. states over time")
 
 Pollutants_States
 ```
