@@ -473,7 +473,7 @@ kable(head(NO2_CO))
 
 ```{r}
 ggplot(NO2_CO, aes(value, color = pollutants)) + 
-  geom_freqpoly(aes(y = ..density..), binwidth = 500)
+  geom_density()
 ```
 
 
