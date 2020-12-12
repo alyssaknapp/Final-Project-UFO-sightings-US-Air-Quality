@@ -32,8 +32,6 @@ library(knitr)
 library(lubridate)
 library(readxl)
 library(DataComputing)
-library(plotly)
-library(sf)
 ```
 
 ```{r}
@@ -259,6 +257,10 @@ max(CO_capital$value)
 median(CO_capital$value)
 ```
 
+*Findings*
+* NO2 values have a larger mean, max & median, compared to CO values 
+* NO2 & CO values both have a min of 1
+
 
 
 ```{r, warning = FALSE, message = FALSE}
@@ -279,6 +281,12 @@ Regions_NO2
 Regions_CO
 ```
 
+*Findings*
+* The West region has the highest pollutant levels of both NO2 and CO, associated with UFO sightings
+* The Midwest region has the lowest pollutant levels of NO2, associated with UFO sightings 
+* The Northeast region has the lowest pollutant levels of CO, associated with UFO sightings
+
+
 ```{r, warning = FALSE, message = FALSE}
 #Pollutant measurements for recorded states
 State_NO2 <- 
@@ -297,23 +305,36 @@ State_NO2
 State_CO
 ```
 
+*Findings*
+* California (CA) has the highest pollutant levels of NO2, associated with UFO sightings
+* Tennessee (TN) has the lowest pollutant levels of NO2, associated with UFO sightings
+* Florida (FL) has the highest pollutant levels of CO, associated with UFO sightings
+* Kansas (KS) has the lowest pollutant levels of CO, associated with UFO sightings 
+
+
 ```{r, warning = FALSE, message = FALSE}
 #UFO sightings for the years 2000 to 2008
 Year_NO2 <-
   NO2_capital %>%
-  group_by(year) %>%
+  group_by(year, pollutants) %>%
   summarise(UFOs_1 = count(ET)) %>%
   arrange(desc(UFOs_1))
 
 Year_CO <- 
   CO_capital %>%
-  group_by(year) %>%
+  group_by(year, pollutants) %>%
   summarise(UFOs_2 = count(ET)) %>%
   arrange(desc(UFOs_2))
 
 Year_NO2
 Year_CO
 ```
+
+*Findings*
+* In 2007, there were the most UFO sightings associated with both NO2 & CO levels 
+* In 2008, there were the least UFO sightings associated with NO2 levels
+* In 2004, there were the least UFO sightings associated with CO levels 
+
 
 
 ## Data Visualization
@@ -326,20 +347,33 @@ NO2_years <-
     group_by(pollutants, year) %>%
     summarise(avg = mean(value)) %>%
     ggplot(aes(x = year, y = avg, color = pollutants)) +
-    geom_point(alpha=0.2) + geom_line(aes(group = pollutants)) 
+    geom_point(alpha=0.2) + geom_line(aes(group = pollutants)) + 
+    ggtitle("NO2 levels associated with UFO sightings over the years")
 
 NO2_years
 ```
+
+*Findings*
+* NO2.AQI recorded higher pollutant levels associated with UFO sightings, compared to NO2.Mean
+* The trends of NO2.Mean and NO2.AQI were similar from 2000-2001 and 2006-2008
+* The trend of NO2.AQI remained relatively constant from 2002-2005, whereas the trend of NO2.Mean declined during these years 
+
 
 ```{r, warning = FALSE, message = FALSE}
 NO2_boxplot <-
   NO2_capital %>%
   ggplot(aes(y = value, x = year)) +
   geom_boxplot(aes(fill = pollutants),
-               notch = TRUE) 
+  notch = TRUE) + 
+  ggtitle("Distribution of NO2 levels and UFO sightings over the years")
 
 NO2_boxplot
 ```
+
+*Findings*
+*
+
+
 
 ```{r, warning = FALSE, message = FALSE}
 NO2_months <- 
@@ -347,10 +381,29 @@ NO2_months <-
     group_by(pollutants, month) %>%
     summarise(avg = mean(value)) %>% 
     ggplot(aes(x = month, y = avg, fill = pollutants)) +
-    geom_bar(stat="identity", position="dodge") 
+    geom_bar(stat="identity", position="dodge") +
+    ggtitle("NO2 levels associated with UFO sightings over the months")
 
 NO2_months
 ```
+
+*Findings*
+*
+
+```{r, warning = FALSE, message = FALSE}
+NO2_weekdays <- 
+  NO2_capital %>%
+    group_by(pollutants, weekday) %>%
+    summarise(avg = mean(value)) %>% 
+    ggplot(aes(x = weekday, y = avg, fill = pollutants)) +
+    geom_bar(stat="identity", position="dodge") + 
+    ggtitle("NO2 levels associated with UFO sightings over the weekdays")
+
+NO2_weekdays
+```
+
+
+
 
 ```{r, warning = FALSE, message = FALSE}
 str(NO2_capital)
@@ -363,31 +416,45 @@ NO2_smooth <-
   summarise(avg = mean(value)) %>%
   ggplot(aes(x = hour, y = avg, color = pollutants)) + 
   geom_point() + 
-  geom_smooth() 
+  geom_smooth() + 
+  ggtitle("NO2 levels and UFO sightings over the hours of a day")
 
 NO2_smooth
 ```
+
+*Findings*
+* 
+
+
 
 ```{r, warning = FALSE, message = FALSE}
 NO2_gradient <- 
   NO2_capital %>%
   filter(pollutants!="NO2.AQI") %>%
   ggplot(aes(x = month, y = year, fill = value)) + 
-  geom_tile(color = "white") + scale_fill_gradient(low ="blue", high ="green") + ggtitle("NO2 Mean")
+  geom_tile(color = "white") + scale_fill_gradient(low ="blue", high ="green") + 
+  ggtitle("NO2 Mean over the months and years")
 
 NO2_gradient
 ```
+
+*Findings*
+* 
+
 
 ```{r, warning = FALSE, message = FALSE}
 NO2_gradient2 <- 
   NO2_capital %>%
   filter(pollutants!="NO2.Mean") %>%
   ggplot(aes(x = month, y = year, fill = value)) + 
-  geom_tile(colour = "white") + scale_fill_gradient(low ="blue", high ="green") + ggtitle("NO2 AQI")
+  geom_tile(colour = "white") + scale_fill_gradient(low ="blue", high ="green") + 
+  ggtitle("NO2 AQI over the months and years")
 
 NO2_gradient2
 ```
 
+*Findings*
+* 
 
 
 ## For CO
@@ -398,10 +465,14 @@ CO_years <-
     group_by(pollutants, year) %>%
     summarise(avg = mean(value)) %>%
     ggplot(aes(x = year, y = avg, color = pollutants)) +
-    geom_point(alpha=0.2) + geom_line(aes(group = pollutants)) 
+    geom_point(alpha=0.2) + geom_line(aes(group = pollutants)) + 
+    ggtitle("CO levels associated with UFO sightings over the years")
 
 CO_years
 ```
+
+*Findings*
+* 
 
 
 ```{r, warning = FALSE, message = FALSE}
@@ -409,10 +480,16 @@ CO_boxplot <-
   CO_capital %>%
   ggplot(aes(y = value, x = year)) +
   geom_boxplot(aes(fill = pollutants),
-               notch = TRUE) 
+               notch = TRUE) + 
+  ggtitle("Distribution of CO levels and UFO sightings over the years")
 
 CO_boxplot
 ```
+
+*Findings*
+*
+
+
 
 ```{r, warning = FALSE, message = FALSE}
 CO_months <- 
@@ -420,10 +497,28 @@ CO_months <-
     group_by(pollutants, month) %>%
     summarise(avg = mean(value)) %>% 
     ggplot(aes(x = month, y = avg, fill = pollutants)) +
-    geom_bar(stat="identity", position="dodge") 
+    geom_bar(stat="identity", position="dodge") + 
+    ggtitle("CO levels associated with UFO sightings over the months")
 
 CO_months
 ```
+
+*Findings*
+* 
+
+```{r, warning = FALSE, message = FALSE}
+CO_weekdays <- 
+  CO_capital %>%
+    group_by(pollutants, weekday) %>%
+    summarise(avg = mean(value)) %>% 
+    ggplot(aes(x = weekday, y = avg, fill = pollutants)) +
+    geom_bar(stat="identity", position="dodge") + 
+    ggtitle("CO levels associated with UFO sightings over the weekdays")
+
+CO_weekdays
+```
+
+
 
 ```{r, warning = FALSE, message = FALSE}
 CO_capital$hour <- as.integer(as.factor(CO_capital$hour))
@@ -434,31 +529,45 @@ CO_smooth <-
   summarise(avg = mean(value)) %>%
   ggplot(aes(x = hour, y = avg, color = pollutants)) +
   geom_point() +
-  geom_smooth()
+  geom_smooth() + 
+  ggtitle("CO levels and UFO sightings over the hours of a day")
 
 CO_smooth
 ```
+
+*Findings*
+*
+
+
 
 ```{r, warning = FALSE, message = FALSE}
 CO_gradient <- 
   CO_capital %>%
   filter(pollutants!="CO.AQI") %>%
   ggplot(aes(x = month, y = year, fill = value)) + 
-  geom_tile(color = "white") + scale_fill_gradient(low ="blue", high ="green") + ggtitle("CO Mean")
+  geom_tile(color = "white") + scale_fill_gradient(low ="blue", high ="green") + 
+  ggtitle("CO Mean over the months and years")
 
 CO_gradient
 ```
+
+*Findings* 
+*
+
 
 ```{r, warning = FALSE, message = FALSE}
 CO_gradient2 <- 
   CO_capital %>%
   filter(pollutants!="CO Mean") %>%
   ggplot(aes(x = month, y = year, fill = value)) + 
-  geom_tile(color = "white") + scale_fill_gradient(low ="blue", high ="green") + ggtitle("CO AQI")
+  geom_tile(color = "white") + scale_fill_gradient(low ="blue", high ="green") + 
+  ggtitle("CO AQI over the months and years")
 
 CO_gradient2
 ```
 
+*Findings*
+* 
 
 
 ## For NO2 & CO
@@ -473,8 +582,12 @@ kable(head(NO2_CO))
 
 ```{r}
 ggplot(NO2_CO, aes(value, color = pollutants)) + 
-  geom_density()
+  geom_density() + 
+  ggtitle("Density of the pollutants associated with UFO sightings")
 ```
+
+*Findings*
+*
 
 
 ```{r, warning = FALSE, message = FALSE, fig.width = 10}
@@ -488,6 +601,9 @@ Pollutant_dist <-
 Pollutant_dist
 ```
 
+*Findings*
+*
+
 
 ```{r, fig.width = 10}
 Pollutants_Regions <- ggplot(data = NO2_CO, aes(x = year,y = value, fill = Region)) + geom_bar(stat ='identity', position ='stack', width =.9)+ facet_wrap(~pollutants, ncol = 3) + ggtitle("NO2 & CO pollutant levels in U.S. regions over time") + theme(axis.text.x = element_text(angle = 60, hjust = 1))
@@ -495,12 +611,18 @@ Pollutants_Regions <- ggplot(data = NO2_CO, aes(x = year,y = value, fill = Regio
 Pollutants_Regions
 ```
 
+*Findings* 
+* 
+
 
 ```{r, fig.height = 8, fig.width = 10}
 Pollutants_States <- ggplot(data = NO2_CO, aes(x = year, y = value, fill = pollutants)) + geom_bar(stat ='identity', position ='dodge', width =.9)+ facet_wrap(~State, ncol = 3) + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + ggtitle("NO2 & CO pollutant levels in U.S. states over time")
 
 Pollutants_States
 ```
+
+*Findings*
+* 
 
 
 ## Conclusions 
