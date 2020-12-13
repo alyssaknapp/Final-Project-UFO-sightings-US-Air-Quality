@@ -2,13 +2,15 @@
 title: "R Notebook"
 author: "Alyssa Knapp"
 date: "12/10/20" 
-output: html_notebook
+output: 
+  html_document: 
+    code_download: true
 ---
 
 # Final Project: UFO Sightings & U.S. Air Quality 
 
 ## Link to GitHub
-
+https://github.com/alyssaknapp/Final-Project-UFO-sightings-US-Air-Quality
 
 
 ## Research Question
@@ -18,12 +20,13 @@ Where are UFO sightings in the United States associated with pollutant levels of
 
 ## Purpose
 
-This topic is important to investigate because there is currently very little knowledge of how climate information relates to UFO sightings. Air quality, in particular, is interesting to explore because air pollutants can impair visibility, which may affect the ability of UFOs to be seen in the sky. This "relationship" is expected to become more polarized over time, as air quality worsens. 
+This topic is important to investigate because there is currently very little knowledge of how climate information relates to UFO sightings. Air quality, in particular, is interesting to explore because air pollutants, such as NO2 and CO, can impair visibility, which may affect the ability of UFOs to be seen in the sky. This "relationship" is expected to become more polarized over time, as air quality worsens. 
 
 
 ## Data Access
 
 ```{r, warning = FALSE, message = FALSE}
+rm(list = ls())
 library(mosaic)
 library(ggplot2)
 library(tidyverse)
@@ -32,10 +35,6 @@ library(knitr)
 library(lubridate)
 library(readxl)
 library(DataComputing)
-```
-
-```{r}
-rm(list=ls())
 ```
 
 ```{r, warning = FALSE, message = FALSE}
@@ -64,7 +63,6 @@ kable(head(AirQ))
 glimpse(AirQ)
 str(AirQ)
 ```
-
 
 ## Variables To Be Used (originally included in data sets)
 
@@ -162,8 +160,12 @@ kable(head(AirQ_long))
 ## Joining the 2 Data Sets
 
 ```{r, warning = FALSE, message = FALSE}
-Join <- left_join(UFO_US %>% group_by(State) %>% mutate(id = row_number()), 
-                    AirQ_long %>% group_by(state) %>% mutate(id = row_number()), 
+Join <- left_join(UFO_US %>% 
+                    group_by(State) %>% 
+                    mutate(id = row_number()), 
+                    AirQ_long %>% 
+                    group_by(state) %>% 
+                    mutate(id = row_number()), 
                     by = c("State" = "state", "id"))
 
 #Select only corresponding variables
@@ -347,7 +349,8 @@ NO2_years <-
     group_by(pollutants, year) %>%
     summarise(avg = mean(value)) %>%
     ggplot(aes(x = year, y = avg, color = pollutants)) +
-    geom_point(alpha=0.2) + geom_line(aes(group = pollutants)) + 
+    geom_point(alpha = 0.2) + 
+    geom_line(aes(group = pollutants)) + 
     ggtitle("NO2 levels associated with UFO sightings over the years")
 
 NO2_years
@@ -384,7 +387,7 @@ NO2_months <-
     group_by(pollutants, month) %>%
     summarise(avg = mean(value)) %>% 
     ggplot(aes(x = month, y = avg, fill = pollutants)) +
-    geom_bar(stat="identity", position="dodge") +
+    geom_bar(stat ="identity", position ="dodge") +
     ggtitle("NO2 levels associated with UFO sightings over the months")
 
 NO2_months
@@ -406,7 +409,7 @@ NO2_weekdays <-
     group_by(pollutants, weekday) %>%
     summarise(avg = mean(value)) %>% 
     ggplot(aes(x = weekday, y = avg, fill = pollutants)) +
-    geom_bar(stat="identity", position="dodge") + 
+    geom_bar(stat ="identity", position ="dodge") + 
     ggtitle("NO2 levels associated with UFO sightings over the weekdays")
 
 NO2_weekdays
@@ -438,9 +441,10 @@ NO2_smooth
 ```
 
 *Findings*
-* The trends for both NO2.AQI and NO2.Mean appear curved and thus, somewhat quadratic (instead of linear)
+* The trends for both NO2.AQI and NO2.Mean are similar and appear curved and thus, somewhat quadratic (instead of linear)
 * The highest pollutant levels of both NO2.AQI and NO2.Mean appear to be in the early and late hours of a day
 * The smoothers for both pollutants only very slightly overlap in the very early hours of a day
+
 
 
 
@@ -486,7 +490,8 @@ CO_years <-
     group_by(pollutants, year) %>%
     summarise(avg = mean(value)) %>%
     ggplot(aes(x = year, y = avg, color = pollutants)) +
-    geom_point(alpha=0.2) + geom_line(aes(group = pollutants)) + 
+    geom_point(alpha = 0.2) + 
+    geom_line(aes(group = pollutants)) + 
     ggtitle("CO levels associated with UFO sightings over the years")
 
 CO_years
@@ -516,14 +521,13 @@ CO_boxplot
 * This plot also shows that CO.AQI recorded higher pollutant levels associated with UFO sightings, compared to CO.Mean
 
 
-
 ```{r, warning = FALSE, message = FALSE}
 CO_months <- 
   CO_capital %>%
     group_by(pollutants, month) %>%
     summarise(avg = mean(value)) %>% 
     ggplot(aes(x = month, y = avg, fill = pollutants)) +
-    geom_bar(stat="identity", position="dodge") + 
+    geom_bar(stat ="identity", position ="dodge") + 
     ggtitle("CO levels associated with UFO sightings over the months")
 
 CO_months
@@ -542,7 +546,7 @@ CO_weekdays <-
     group_by(pollutants, weekday) %>%
     summarise(avg = mean(value)) %>% 
     ggplot(aes(x = weekday, y = avg, fill = pollutants)) +
-    geom_bar(stat="identity", position="dodge") + 
+    geom_bar(stat ="identity", position ="dodge") + 
     ggtitle("CO levels associated with UFO sightings over the weekdays")
 
 CO_weekdays
@@ -577,6 +581,7 @@ CO_smooth
 
 
 
+
 ```{r, warning = FALSE, message = FALSE}
 CO_gradient <- 
   CO_capital %>%
@@ -593,7 +598,6 @@ CO_gradient
 * There are mainly low pollutant values associated with UFO sightings for CO.Mean throughout all the months (specifically in February-September)
 * The lowest pollutant values for CO.Mean, associated with UFO sightings, mainly occur throughout all the years 
 * The highest pollutant values for CO.Mean, associated with UFO sightings, mainly appear in January and December 
-
 
 
 ```{r, warning = FALSE, message = FALSE}
@@ -614,7 +618,6 @@ CO_gradient2
 * The highest pollutant values for CO.AQI, associated with UFO sightings, mainly appear in January and December 
 
 
-
 ## For NO2 & CO
 
 ```{r, warning = FALSE, message = FALSE}
@@ -626,13 +629,17 @@ kable(head(NO2_CO))
 ```
 
 ```{r}
-ggplot(NO2_CO, aes(value, color = pollutants)) + 
+Density <- 
+  ggplot(NO2_CO, aes(value, color = pollutants)) + 
   geom_density() + 
-  ggtitle("Density of the pollutants associated with UFO sightings")
+  ggtitle("Density of pollutants associated with UFO sightings")
+
+Density
 ```
 
 *Findings*
-*
+* CO.AQI showed the highest density, whereas the other pollutants showed a fairly constant density around 0
+* CO.Mean's density spiked then remained constant, whereas NO2.AQI's density started constant but later slightly increased 
 
 
 ```{r, warning = FALSE, message = FALSE, fig.width = 10}
@@ -641,40 +648,81 @@ Pollutant_dist <-
   ggplot(aes(y = value, x = pollutants)) +
   geom_boxplot(aes(fill = Region)) +
   geom_jitter() + 
-  ggtitle("Distribution of NO2 & CO values in U.S. regions")
+  ggtitle("Distribution of NO2 & CO levels in U.S. regions")
 
 Pollutant_dist
 ```
 
 *Findings*
+* In general, NO2.AQI showed the highest mean pollutant levels associated with UFO sightings, compared to the other pollutants
 * Due to the smaller number of cases for CO.AQI, an association with UFO sightings and U.S. region cannot be determined
+* For CO.Mean, the Midwest region showed the highest mean pollutant levels, associated with UFO sightings 
+* For CO.Mean, the South region showed the lowest mean pollutant levels, associated with UFO sightings 
+* For NO2.AQI, the Midwest and West regions showed the highest mean pollutant levels, associated with UFO sightings
+* For NO2.AQI, the South region showed the lowest mean pollutant levels, associated with UFO sightings
+* For NO2.Mean, the Midwest region showed the highest mean pollutant levels, associated with UFO sightings
+* For NO2.Mean, the South region showed the lowest mean pollutant levels, associated with UFO sightins
+
 
 
 ```{r, fig.width = 10}
-Pollutants_Regions <- ggplot(data = NO2_CO, aes(x = year,y = value, fill = Region)) + geom_bar(stat ='identity', position ='stack', width =.9)+ facet_wrap(~pollutants, ncol = 3) + ggtitle("NO2 & CO pollutant levels in U.S. regions over time") + theme(axis.text.x = element_text(angle = 60, hjust = 1))
+Pollutants_Regions <- 
+  ggplot(data = NO2_CO, aes(x = year,y = value, fill = Region)) + 
+  geom_bar(stat ='identity', position ='stack', width =.9) + 
+  facet_wrap(~pollutants, ncol = 3) + 
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) + 
+  ggtitle("NO2 & CO pollutant levels in U.S. regions over time")
 
 Pollutants_Regions
 ```
 
 *Findings* 
-* NO2.AQI & NO2.Mean showed the greatest association with UFO sightings in the Northeast region and West region from 2000 to 2008
-* NO2.Mean was highest in 2008 & NO2.AQI was highest in 2006
-* Due to the smaller number of cases for CO.AQI & CO.Mean, an association with UFO sightings and U.S. region cannot be determined
-
-
+* Pollutant levels fluctuated over time
+* The Northeast and West regions were associated with the highest pollutant levels and UFO sightings, followed by the South and Midwest regions
+* NO2.Mean was highest in 2008 and NO2.AQI was highest in 2006
+* NO2.Mean was lowest in 2000 and 2007 and NO2.AQI was lowest in 2008
+* Due to the smaller number of cases for CO.AQI and CO.Mean, an association with UFO sightings and U.S. region cannot be determined
+* There is no recorded data for CO.AQI for 2000 and 2008
 
 ```{r, fig.height = 8, fig.width = 10}
-Pollutants_States <- ggplot(data = NO2_CO, aes(x = year, y = value, fill = pollutants)) + geom_bar(stat ='identity', position ='dodge', width =.9)+ facet_wrap(~State, ncol = 3) + theme(axis.text.x = element_text(angle = 60, hjust = 1)) + ggtitle("NO2 & CO pollutant levels in U.S. states over time")
+Pollutants_States <- 
+  ggplot(data = NO2_CO, aes(x = year, y = value, fill = pollutants)) +
+  geom_bar(stat ='identity', position ='dodge', width =.9) +
+  facet_wrap(~State, ncol = 3) + 
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) + 
+  ggtitle("NO2 & CO pollutant levels in U.S. states over time")
 
 Pollutants_States
 ```
 
 *Findings*
-* California & Texas (CA & TX) only showed a strong association between UFO sightings and NO2.Mean from 2000 to 2008; these values slightly fluctuated over time
-* CO.AQI & CO.Mean showed a smaller association with UFO sightings across all recorded states, compared to NO2.AQI & NO2.Mean
+* Arizona (AZ), California (CA), New York (NY), and Texas (TX) consistently showed the highest pollutant levels associated with UFO sightings from 2000 to 2008
+* California and Texas (CA & TX) only showed a strong association between UFO sightings and NO2.Mean from 2000 to 2008; these values slightly fluctuated over time
+* CO.AQI and CO.Mean showed a smaller association with UFO sightings across all recorded states, compared to NO2.AQI & NO2.Mean
 
 
 ## Conclusions 
+
+Due to wrangling my data and creating visualizations, I was able to explore the relationship between the four air pollutants (NO2.Mean, NO2.AQI, CO.Mean, and CO.AQI) and UFO sightings, in terms of their *location in the United States* and the *time recorded*. U.S. location was measured at the region and state level, while time was measured in terms of hours in a day, weekdays, months and years (from 2000-2008). 
+
+*Regions*:
+For NO2.AQI and NO2.Mean, I found that the West and Northeast regions were associated with the highest pollutant levels and UFO sightings, followed by the South and Midwest regions. For CO.AQI and CO.Mean, an association between UFO sightings and U.S. regions was difficult to determine due to the smaller number of cases recorded. However, these pollutants were technically highest in the West region and lowest in the Northeast region. Overall, the West region showed the greatest association between air pollutants and UFO sightings. 
+*States*:
+I found that NO2 pollutants, associated with UFO sightings, were highest in California (CA) and lowest in Tennessee (TN). In contrast, CO pollutants, associated with UFO sightings, were highest in Florida and lowest in Kansas (KS). Given these findings, I can conclude that there is no obvious trend or pattern with regard to state. Some possible patterns could have shown high pollutant levels and UFO sightings in adjacent states or states with warmer temperatures. 
+
+*Hours*:
+I found that NO2.AQI and NO2.Mean pollutant levels, associated with UFO sightings, generally increased in the early hours of a given day, decreased midday, and then increased again in the late hours of the day. In contrast, CO.AQI remained relatively constant over the hours of a given day, while CO.Mean increased until the 10-hour mark then decreased until the 20-hour mark before increasing again. Therefore, it can be concluded that NO2.AQI, NO2.Mean, and CO.Mean fluctuated (increasing and decreasing) throughout the hours of a given day, while CO.AQI stayed constant. 
+*Weekdays*:
+I found that NO2.AQI pollutant levels, associated with UFO sightings, increased until Thursday, decreased until Saturday, then increased on Sunday. In contrast, NO2.Mean, CO.AQI, and CO.Mean pollutant levels, associated with UFO sightings, remained relatively constant throughout the weekdays. 
+*Months*: 
+I found that NO2 pollutants and CO.Mean,associated with UFO sightings, started at high levels before decreasing, then increasing again. However, CO.AQI stayed fairly constant throughout the months. 
+*Years*:
+I found that both NO2.AQI and CO.Mean, associated with UFO sightings, were highest in 2006 and lowest in 2008. However, NO2.Mean, associated with UFO sightings, was highest in 2004 and lowest in 2000 and 2007. CO.AQI, associated with UFO sightings, was also highest in 2007 and lowest in 2003 and 2004. This showed that throughout the years, when NO2.Mean was highest, CO.AQI was typically lowest. Moreover, although NO2.AQI and CO.AQI showed higher averages over the years, NO2.Mean and CO.Mean ultimately showed higher pollutant levels, associated with UFO sightings. 
+
+Based on my time results, I can conclude that CO.AQI pollutant levels remained relatively constant over time, while the NO2 pollutants and CO.Mean fluctuated over time and peaked in different years. Altogether, NO2.Mean showed the highest pollutant levels, associated with UFO sightings, over the years. 
+
+Overall, my findings show some variation and pose additional questions, so I believe more research should be conducted on this topic. Additional research would offer more information about the potential relationship between air pollutants, UFO sightings, U.S. location, and time. 
+
 
 
 
