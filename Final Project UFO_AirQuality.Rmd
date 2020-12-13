@@ -26,7 +26,7 @@ This topic is important to investigate because there is currently very little kn
 ## Data Access
 
 ```{r, warning = FALSE, message = FALSE}
-rm(list = ls())
+#rm(list = ls())
 library(mosaic)
 library(ggplot2)
 library(tidyverse)
@@ -217,8 +217,8 @@ CO_capital <-
   else return(v)
 }))
 
-NO2_capital
-CO_capital
+kable(head(NO2_capital))
+kable(head(CO_capital))
 ```
 
 
