@@ -260,8 +260,8 @@ median(CO_capital$value)
 ```
 
 *Findings*
-* NO2 values have a larger mean, max & median, compared to CO values 
-* NO2 & CO values both have a min of 1
+*NO2 values have a larger mean, max & median, compared to CO values 
+*NO2 & CO values both have a min of 1
 
 
 
@@ -284,9 +284,9 @@ Regions_CO
 ```
 
 *Findings*
-* The West region has the highest pollutant levels of both NO2 and CO, associated with UFO sightings
-* The Midwest region has the lowest pollutant levels of NO2, associated with UFO sightings 
-* The Northeast region has the lowest pollutant levels of CO, associated with UFO sightings
+*The West region has the highest pollutant levels of both NO2 and CO, associated with UFO sightings
+*The Midwest region has the lowest pollutant levels of NO2, associated with UFO sightings 
+*The Northeast region has the lowest pollutant levels of CO, associated with UFO sightings
 
 
 ```{r, warning = FALSE, message = FALSE}
@@ -308,10 +308,10 @@ State_CO
 ```
 
 *Findings*
-* California (CA) has the highest pollutant levels of NO2, associated with UFO sightings
-* Tennessee (TN) has the lowest pollutant levels of NO2, associated with UFO sightings
-* Florida (FL) has the highest pollutant levels of CO, associated with UFO sightings
-* Kansas (KS) has the lowest pollutant levels of CO, associated with UFO sightings 
+*California (CA) has the highest pollutant levels of NO2, associated with UFO sightings
+*Tennessee (TN) has the lowest pollutant levels of NO2, associated with UFO sightings
+*Florida (FL) has the highest pollutant levels of CO, associated with UFO sightings
+*Kansas (KS) has the lowest pollutant levels of CO, associated with UFO sightings 
 
 
 ```{r, warning = FALSE, message = FALSE}
@@ -333,9 +333,9 @@ Year_CO
 ```
 
 *Findings*
-* In 2007, there were the most UFO sightings associated with both NO2 & CO levels 
-* In 2008, there were the least UFO sightings associated with NO2 levels
-* In 2004, there were the least UFO sightings associated with CO levels 
+*In 2007, there were the most UFO sightings associated with both NO2 & CO levels 
+*In 2008, there were the least UFO sightings associated with NO2 levels
+*In 2004, there were the least UFO sightings associated with CO levels 
 
 
 
@@ -357,9 +357,9 @@ NO2_years
 ```
 
 *Findings*
-* NO2.AQI recorded higher pollutant levels associated with UFO sightings, compared to NO2.Mean
-* The trends of NO2.Mean and NO2.AQI were similar from 2000-2001 and 2006-2008
-* The trend of NO2.AQI remained relatively constant from 2002-2005, whereas the trend of NO2.Mean declined during these years 
+*NO2.AQI recorded higher pollutant levels associated with UFO sightings, compared to NO2.Mean
+*The trends of NO2.Mean and NO2.AQI were similar from 2000-2001 and 2006-2008
+*The trend of NO2.AQI remained relatively constant from 2002-2005, whereas the trend of NO2.Mean declined during these years 
 
 
 ```{r, warning = FALSE, message = FALSE}
@@ -374,10 +374,10 @@ NO2_boxplot
 ```
 
 *Findings*
-* NO2.Mean has the larger spread, compared to NO2.AQI
-* Most of the confidence intervals appear wide for both NO2.Mean and NO2, but they are wider for NO2.Mean
-* There are some outliers, indicated by the outlying points 
-* This plot also shows that NO2.AQI recorded higher pollutant levels associated with UFO sightings, compared to NO2.Mean
+*NO2.Mean has the larger spread, compared to NO2.AQI
+*Most of the confidence intervals appear wide for both NO2.Mean and NO2, but they are wider for NO2.Mean
+*There are some outliers, indicated by the outlying points 
+*This plot also shows that NO2.AQI recorded higher pollutant levels associated with UFO sightings, compared to NO2.Mean
 
 
 
@@ -394,12 +394,12 @@ NO2_months
 ```
 
 *Findings*
-* NO2.AQI recorded higher pollutant levels associated with UFO sightings over the months, compared to NO2.Mean
-* The trend appears somewhat concave up quadratic for both pollutant levels of NO2: both start at high levels, then decrease, before increasing again 
-* January and March showed the highest pollutant levels for NO2.AQI, associated with UFO sightings
-* June and December showed the lowest pollutant levels for NO2.AQI, associated with UFO sightings 
-* January, February, November, and December showed the highest pollutant levels for NO2.Mean, associated with UFO sightings
-* July showed the lowest pollutant levels for NO2.Mean, associated with UFO sightings
+*NO2.AQI recorded higher pollutant levels associated with UFO sightings over the months, compared to NO2.Mean
+*The trend appears somewhat concave up quadratic for both pollutant levels of NO2: both start at high levels, then decrease, before increasing again 
+*January and March showed the highest pollutant levels for NO2.AQI, associated with UFO sightings
+*June and December showed the lowest pollutant levels for NO2.AQI, associated with UFO sightings 
+*January, February, November, and December showed the highest pollutant levels for NO2.Mean, associated with UFO sightings
+*July showed the lowest pollutant levels for NO2.Mean, associated with UFO sightings
 
 
 
@@ -416,10 +416,10 @@ NO2_weekdays
 ```
 
 *Findings*
-* NO2.AQI recorded higher pollutant levels associated with UFO sightings over the weekdays, compared to NO2.Mean
-* NO2.AQI and UFO sightings seemed to fluctuate slightly more over the weekdays, compared to NO2.Mean
-* Thursday showed the highest pollutant levels for NO2.AQI and NO2.Mean, associated with UFO sightings
-* Monday showed the lowest pollutant levels for NO2.AQI and NO2.Mean, associated with UFO sightings 
+*NO2.AQI recorded higher pollutant levels associated with UFO sightings over the weekdays, compared to NO2.Mean
+*NO2.AQI and UFO sightings seemed to fluctuate slightly more over the weekdays, compared to NO2.Mean
+*Thursday showed the highest pollutant levels for NO2.AQI and NO2.Mean, associated with UFO sightings
+*Monday showed the lowest pollutant levels for NO2.AQI and NO2.Mean, associated with UFO sightings 
 
 
 
@@ -441,9 +441,9 @@ NO2_smooth
 ```
 
 *Findings*
-* The trends for both NO2.AQI and NO2.Mean are similar and appear curved and thus, somewhat quadratic (instead of linear)
-* The highest pollutant levels of both NO2.AQI and NO2.Mean appear to be in the early and late hours of a day
-* The smoothers for both pollutants only very slightly overlap in the very early hours of a day
+*The trends for both NO2.AQI and NO2.Mean are similar and appear curved and thus, somewhat quadratic (instead of linear)
+*The highest pollutant levels of both NO2.AQI and NO2.Mean appear to be in the early and late hours of a day
+*The smoothers for both pollutants only very slightly overlap in the very early hours of a day
 
 
 
@@ -460,9 +460,9 @@ NO2_gradient
 ```
 
 *Findings*
-* The lowest pollutant values for NO2.Mean, associated with UFO sightings, mainly appear in the early spring, summer, and early fall months (April-October)
-* The highest pollutant values for NO2.Mean, associated with UFO sightings, mainly appear in the winter months and also border on the early spring months (November-March)
-* The lowest pollutant values for NO2.Mean, associated with UFO sightings, mainly appear in the years of 2006 and 2007
+*The lowest pollutant values for NO2.Mean, associated with UFO sightings, mainly appear in the early spring, summer, and early fall months (April-October)
+*The highest pollutant values for NO2.Mean, associated with UFO sightings, mainly appear in the winter months and also border on the early spring months (November-March)
+*The lowest pollutant values for NO2.Mean, associated with UFO sightings, mainly appear in the years of 2006 and 2007
 
 
 ```{r, warning = FALSE, message = FALSE}
@@ -477,9 +477,9 @@ NO2_gradient2
 ```
 
 *Findings*
-* There are mainly high pollutant values associated with UFO sightings for NO2.AQI throughout all the months 
-* The lowest pollutant values associated with UFO sightings for NO2.AQI occur in 2008 and during the months of March, July, and August
-* The highest pollutant values for NO2.AQI, associated with UFO sightings, mainly appear in the years of 2001 and 2002 
+*There are mainly high pollutant values associated with UFO sightings for NO2.AQI throughout all the months 
+*The lowest pollutant values associated with UFO sightings for NO2.AQI occur in 2008 and during the months of March, July, and August
+*The highest pollutant values for NO2.AQI, associated with UFO sightings, mainly appear in the years of 2001 and 2002 
 
 
 ## For CO
@@ -498,9 +498,9 @@ CO_years
 ```
 
 *Findings*
-* CO.AQI recorded higher pollutant levels associated with UFO sightings, compared to CO.Mean
-* No CO.AQI pollutant levels were associated with UFO sightings in the years from 2000-2001 and 2007-2008
-* The trend of CO.AQI remained relatively constant from 2002-2005, whereas the trend of NO2.Mean rotated being sharply increasing and decreasing 
+*CO.AQI recorded higher pollutant levels associated with UFO sightings, compared to CO.Mean
+*No CO.AQI pollutant levels were associated with UFO sightings in the years from 2000-2001 and 2007-2008
+*The trend of CO.AQI remained relatively constant from 2002-2005, whereas the trend of NO2.Mean rotated being sharply increasing and decreasing 
 
 
 ```{r, warning = FALSE, message = FALSE}
@@ -515,10 +515,10 @@ CO_boxplot
 ```
 
 *Findings*
-* CO.Mean has the larger spread, compared to CO.AQI
-* The confidence intervals appear wide for CO.Mean, but not CO.AQI
-* There are some outliers, indicated by the outlying points 
-* This plot also shows that CO.AQI recorded higher pollutant levels associated with UFO sightings, compared to CO.Mean
+*CO.Mean has the larger spread, compared to CO.AQI
+*The confidence intervals appear wide for CO.Mean, but not CO.AQI
+*There are some outliers, indicated by the outlying points 
+*This plot also shows that CO.AQI recorded higher pollutant levels associated with UFO sightings, compared to CO.Mean
 
 
 ```{r, warning = FALSE, message = FALSE}
@@ -534,10 +534,10 @@ CO_months
 ```
 
 *Findings*
-* CO.AQI recorded higher pollutant levels associated with UFO sightings over the months, compared to CO.Mean
-* The trend for CO.AQI, associated with UFO sightings, remained relatively constant over the months 
-* January showed the highest pollutant levels for CO.Mean, associated with UFO sightings
-* June showed the lowest pollutant levels for CO.Mean, associated with UFO sightings
+*CO.AQI recorded higher pollutant levels associated with UFO sightings over the months, compared to CO.Mean
+*The trend for CO.AQI, associated with UFO sightings, remained relatively constant over the months 
+*January showed the highest pollutant levels for CO.Mean, associated with UFO sightings
+*June showed the lowest pollutant levels for CO.Mean, associated with UFO sightings
 
 
 ```{r, warning = FALSE, message = FALSE}
@@ -553,9 +553,9 @@ CO_weekdays
 ```
 
 *Findings*
-* CO.AQI recorded higher pollutant levels associated with UFO sightings over the weekdays, compared to CO.Mean
-* CO.AQI and CO.Mean, both associated with UFO sightings, remained relatively constant over the weekdays 
-* Sunday showed the highest pollutant levels for CO.Mean, associated with UFO sightings 
+*CO.AQI recorded higher pollutant levels associated with UFO sightings over the weekdays, compared to CO.Mean
+*CO.AQI and CO.Mean, both associated with UFO sightings, remained relatively constant over the weekdays 
+*Sunday showed the highest pollutant levels for CO.Mean, associated with UFO sightings 
 
 
 ```{r, warning = FALSE, message = FALSE}
@@ -574,10 +574,10 @@ CO_smooth
 ```
 
 *Findings*
-* The trend for CO.Mean appears curved and thus, somewhat quadratic (instead of linear)
-* The trend for CO.AQI is a constant line that slightly curves during the later hours of a day
-* The highest pollutant levels of CO.AQI associated with UFO sightings occurs at 10 hours of a day
-* The smoothers for both pollutants do not overlap at any hours during a day
+*The trend for CO.Mean appears curved and thus, somewhat quadratic (instead of linear)
+*The trend for CO.AQI is a constant line that slightly curves during the later hours of a day
+*The highest pollutant levels of CO.AQI associated with UFO sightings occurs at 10 hours of a day
+*The smoothers for both pollutants do not overlap at any hours during a day
 
 
 
@@ -594,10 +594,10 @@ CO_gradient
 ```
 
 *Findings* 
-* The tiles for this plot have areas of no data, compared to the NO2 plots that were completely filled in with values and thus, gradient
-* There are mainly low pollutant values associated with UFO sightings for CO.Mean throughout all the months (specifically in February-September)
-* The lowest pollutant values for CO.Mean, associated with UFO sightings, mainly occur throughout all the years 
-* The highest pollutant values for CO.Mean, associated with UFO sightings, mainly appear in January and December 
+*The tiles for this plot have areas of no data, compared to the NO2 plots that were completely filled in with values and thus, gradient
+*There are mainly low pollutant values associated with UFO sightings for CO.Mean throughout all the months (specifically in February-September)
+*The lowest pollutant values for CO.Mean, associated with UFO sightings, mainly occur throughout all the years 
+*The highest pollutant values for CO.Mean, associated with UFO sightings, mainly appear in January and December 
 
 
 ```{r, warning = FALSE, message = FALSE}
@@ -612,10 +612,10 @@ CO_gradient2
 ```
 
 *Findings*
-* The tiles for this plot have areas of no data, compared to the NO2 plots that were completely filled in with values and thus, gradient
-* There are mainly low pollutant values associated with UFO sightings for CO.AQI throughout all the months (specifically in February-September)
-* The lowest pollutant values for CO.AQI, associated with UFO sightings, mainly occur throughout all the years 
-* The highest pollutant values for CO.AQI, associated with UFO sightings, mainly appear in January and December 
+*The tiles for this plot have areas of no data, compared to the NO2 plots that were completely filled in with values and thus, gradient
+*There are mainly low pollutant values associated with UFO sightings for CO.AQI throughout all the months (specifically in February-September)
+*The lowest pollutant values for CO.AQI, associated with UFO sightings, mainly occur throughout all the years 
+*The highest pollutant values for CO.AQI, associated with UFO sightings, mainly appear in January and December 
 
 
 ## For NO2 & CO
@@ -638,8 +638,8 @@ Density
 ```
 
 *Findings*
-* CO.AQI showed the highest density, whereas the other pollutants showed a fairly constant density around 0
-* CO.Mean's density spiked then remained constant, whereas NO2.AQI's density started constant but later slightly increased 
+*CO.AQI showed the highest density, whereas the other pollutants showed a fairly constant density around 0
+*CO.Mean's density spiked then remained constant, whereas NO2.AQI's density started constant but later slightly increased 
 
 
 ```{r, warning = FALSE, message = FALSE, fig.width = 10}
@@ -654,14 +654,14 @@ Pollutant_dist
 ```
 
 *Findings*
-* In general, NO2.AQI showed the highest mean pollutant levels associated with UFO sightings, compared to the other pollutants
-* Due to the smaller number of cases for CO.AQI, an association with UFO sightings and U.S. region cannot be determined
-* For CO.Mean, the Midwest region showed the highest mean pollutant levels, associated with UFO sightings 
-* For CO.Mean, the South region showed the lowest mean pollutant levels, associated with UFO sightings 
-* For NO2.AQI, the Midwest and West regions showed the highest mean pollutant levels, associated with UFO sightings
-* For NO2.AQI, the South region showed the lowest mean pollutant levels, associated with UFO sightings
-* For NO2.Mean, the Midwest region showed the highest mean pollutant levels, associated with UFO sightings
-* For NO2.Mean, the South region showed the lowest mean pollutant levels, associated with UFO sightins
+*In general, NO2.AQI showed the highest mean pollutant levels associated with UFO sightings, compared to the other pollutants
+*Due to the smaller number of cases for CO.AQI, an association with UFO sightings and U.S. region cannot be determined
+*For CO.Mean, the Midwest region showed the highest mean pollutant levels, associated with UFO sightings 
+*For CO.Mean, the South region showed the lowest mean pollutant levels, associated with UFO sightings 
+*For NO2.AQI, the Midwest and West regions showed the highest mean pollutant levels, associated with UFO sightings
+*For NO2.AQI, the South region showed the lowest mean pollutant levels, associated with UFO sightings
+*For NO2.Mean, the Midwest region showed the highest mean pollutant levels, associated with UFO sightings
+*For NO2.Mean, the South region showed the lowest mean pollutant levels, associated with UFO sightins
 
 
 
@@ -677,12 +677,12 @@ Pollutants_Regions
 ```
 
 *Findings* 
-* Pollutant levels fluctuated over time
-* The Northeast and West regions were associated with the highest pollutant levels and UFO sightings, followed by the South and Midwest regions
-* NO2.Mean was highest in 2008 and NO2.AQI was highest in 2006
-* NO2.Mean was lowest in 2000 and 2007 and NO2.AQI was lowest in 2008
-* Due to the smaller number of cases for CO.AQI and CO.Mean, an association with UFO sightings and U.S. region cannot be determined
-* There is no recorded data for CO.AQI for 2000 and 2008
+*Pollutant levels fluctuated over time
+*The Northeast and West regions were associated with the highest pollutant levels and UFO sightings, followed by the South and Midwest regions
+*NO2.Mean was highest in 2008 and NO2.AQI was highest in 2006
+*NO2.Mean was lowest in 2000 and 2007 and NO2.AQI was lowest in 2008
+*Due to the smaller number of cases for CO.AQI and CO.Mean, an association with UFO sightings and U.S. region cannot be determined
+*There is no recorded data for CO.AQI for 2000 and 2008
 
 ```{r, fig.height = 8, fig.width = 10}
 Pollutants_States <- 
@@ -696,9 +696,9 @@ Pollutants_States
 ```
 
 *Findings*
-* Arizona (AZ), California (CA), New York (NY), and Texas (TX) consistently showed the highest pollutant levels associated with UFO sightings from 2000 to 2008
-* California and Texas (CA & TX) only showed a strong association between UFO sightings and NO2.Mean from 2000 to 2008; these values slightly fluctuated over time
-* CO.AQI and CO.Mean showed a smaller association with UFO sightings across all recorded states, compared to NO2.AQI & NO2.Mean
+*Arizona (AZ), California (CA), New York (NY), and Texas (TX) consistently showed the highest pollutant levels associated with UFO sightings from 2000 to 2008
+*California and Texas (CA & TX) only showed a strong association between UFO sightings and NO2.Mean from 2000 to 2008; these values slightly fluctuated over time
+*CO.AQI and CO.Mean showed a smaller association with UFO sightings across all recorded states, compared to NO2.AQI & NO2.Mean
 
 
 ## Conclusions 
