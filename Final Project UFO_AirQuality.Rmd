@@ -360,13 +360,15 @@ NO2.AQI recorded higher pollutant levels associated with UFO sightings, compared
 
 
 
+
+
 ```{r, warning = FALSE, message = FALSE}
 NO2_boxplot <-
   NO2_capital %>%
   ggplot(aes(y = value, x = year)) +
   geom_boxplot(aes(fill = pollutants),
   notch = TRUE) + 
-  ylab("NO2 levels")
+  ylab("NO2 levels") +
   ggtitle("Distribution of NO2 levels and UFO sightings over the years")
 
 NO2_boxplot
@@ -385,8 +387,8 @@ NO2_months <-
     group_by(pollutants, month) %>%
     summarise(avg = mean(value)) %>% 
     ggplot(aes(x = month, y = avg, fill = pollutants)) +
-    geom_bar(stat ="identity", position ="dodge") +
-    ylab("NO2 levels")
+    geom_bar(stat = "identity", position = "dodge") +
+    ylab("NO2 levels") + 
     ggtitle("NO2 levels associated with UFO sightings over the months")
 
 NO2_months
@@ -401,15 +403,14 @@ NO2.AQI recorded higher pollutant levels associated with UFO sightings over the 
 
 
 
-
 ```{r, warning = FALSE, message = FALSE}
 NO2_weekdays <- 
   NO2_capital %>%
     group_by(pollutants, weekday) %>%
     summarise(avg = mean(value)) %>% 
     ggplot(aes(x = weekday, y = avg, fill = pollutants)) +
-    geom_bar(stat ="identity", position ="dodge") + 
-    ylab("NO2 levels")
+    geom_bar(stat = "identity", position = "dodge") + 
+    ylab("NO2 levels") +
     ggtitle("NO2 levels associated with UFO sightings over the weekdays")
 
 NO2_weekdays
@@ -417,7 +418,6 @@ NO2_weekdays
 
 _Findings_
 NO2.AQI recorded higher pollutant levels associated with UFO sightings over the weekdays, compared to NO2.Mean. NO2.AQI and UFO sightings seemed to fluctuate slightly more over the weekdays, compared to NO2.Mean. Thursday showed the highest pollutant levels for NO2.AQI and NO2.Mean, associated with UFO sightings. Monday showed the lowest pollutant levels for NO2.AQI and NO2.Mean, associated with UFO sightings. 
-
 
 
 
@@ -435,7 +435,7 @@ NO2_smooth <-
   ggplot(aes(x = hour, y = avg, color = pollutants)) + 
   geom_point() + 
   geom_smooth() + 
-  ylab("NO2 levels")
+  ylab("NO2 levels") + 
   ggtitle("NO2 levels and UFO sightings over the hours of a day")
 
 NO2_smooth
@@ -447,13 +447,12 @@ The trends for both NO2.AQI and NO2.Mean are similar and appear curved and thus,
 
 
 
-
 ```{r, warning = FALSE, message = FALSE}
 NO2_gradient <- 
   NO2_capital %>%
   filter(pollutants!="NO2.AQI") %>%
   ggplot(aes(x = month, y = year, fill = value)) + 
-  geom_tile(color = "white") + scale_fill_gradient(low ="blue", high ="green") + 
+  geom_tile(color = "white") + scale_fill_gradient(low = "blue", high = "green") + 
   ggtitle("NO2 Mean over the months and years")
 
 NO2_gradient
@@ -470,7 +469,7 @@ NO2_gradient2 <-
   NO2_capital %>%
   filter(pollutants!="NO2.Mean") %>%
   ggplot(aes(x = month, y = year, fill = value)) + 
-  geom_tile(colour = "white") + scale_fill_gradient(low ="blue", high ="green") + 
+  geom_tile(color = "white") + scale_fill_gradient(low = "blue", high = "green") + 
   ggtitle("NO2 AQI over the months and years")
 
 NO2_gradient2
@@ -478,7 +477,6 @@ NO2_gradient2
 
 _Findings_
 There are mainly high pollutant values associated with UFO sightings for NO2.AQI throughout all the months. The lowest pollutant values associated with UFO sightings for NO2.AQI occur in 2008 and during the months of March, July, and August. The highest pollutant values for NO2.AQI, associated with UFO sightings, mainly appear in the years of 2001 and 2002. 
-
 
 
 
@@ -504,14 +502,13 @@ CO.AQI recorded higher pollutant levels associated with UFO sightings, compared 
 
 
 
-
 ```{r, warning = FALSE, message = FALSE}
 CO_boxplot <-
   CO_capital %>%
   ggplot(aes(y = value, x = year)) +
   geom_boxplot(aes(fill = pollutants),
                notch = TRUE) + 
-  ylab("CO levels")
+  ylab("CO levels") +
   ggtitle("Distribution of CO levels and UFO sightings over the years")
 
 CO_boxplot
@@ -524,14 +521,13 @@ This plot also shows that CO.AQI recorded higher pollutant levels associated wit
 
 
 
-
 ```{r, warning = FALSE, message = FALSE}
 CO_months <- 
   CO_capital %>%
     group_by(pollutants, month) %>%
     summarise(avg = mean(value)) %>% 
     ggplot(aes(x = month, y = avg, fill = pollutants)) +
-    geom_bar(stat ="identity", position ="dodge") + 
+    geom_bar(stat = "identity", position = "dodge") + 
     ylab("CO levels") + 
     ggtitle("CO levels associated with UFO sightings over the months")
 
@@ -544,14 +540,13 @@ CO.AQI recorded higher pollutant levels associated with UFO sightings over the m
 
 
 
-
 ```{r, warning = FALSE, message = FALSE}
 CO_weekdays <- 
   CO_capital %>%
     group_by(pollutants, weekday) %>%
     summarise(avg = mean(value)) %>% 
     ggplot(aes(x = weekday, y = avg, fill = pollutants)) +
-    geom_bar(stat ="identity", position ="dodge") + 
+    geom_bar(stat = "identity", position = "dodge") + 
     ylab("CO levels") + 
     ggtitle("CO levels associated with UFO sightings over the weekdays")
 
@@ -560,7 +555,6 @@ CO_weekdays
 
 _Findings_
 CO.AQI recorded higher pollutant levels associated with UFO sightings over the weekdays, compared to CO.Mean. CO.AQI and CO.Mean, both associated with UFO sightings, remained relatively constant over the weekdays. Sunday showed the highest pollutant levels for CO.Mean, associated with UFO sightings. 
-
 
 
 
@@ -574,7 +568,7 @@ CO_smooth <-
   ggplot(aes(x = hour, y = avg, color = pollutants)) +
   geom_point() +
   geom_smooth() + 
-  ylab("CO levels")
+  ylab("CO levels") +
   ggtitle("CO levels and UFO sightings over the hours of a day")
 
 CO_smooth
@@ -587,13 +581,12 @@ The trend for CO.Mean appears curved and thus, somewhat quadratic (instead of li
 
 
 
-
 ```{r, warning = FALSE, message = FALSE}
 CO_gradient <- 
   CO_capital %>%
   filter(pollutants!="CO.AQI") %>%
   ggplot(aes(x = month, y = year, fill = value)) + 
-  geom_tile(color = "white") + scale_fill_gradient(low ="blue", high ="green") + 
+  geom_tile(color = "white") + scale_fill_gradient(low = "blue", high = "green") + 
   ggtitle("CO Mean over the months and years")
 
 CO_gradient
@@ -612,7 +605,7 @@ CO_gradient2 <-
   CO_capital %>%
   filter(pollutants!="CO Mean") %>%
   ggplot(aes(x = month, y = year, fill = value)) + 
-  geom_tile(color = "white") + scale_fill_gradient(low ="blue", high ="green") + 
+  geom_tile(color = "white") + scale_fill_gradient(low = "blue", high = "green") + 
   ggtitle("CO AQI over the months and years")
 
 CO_gradient2
@@ -640,7 +633,7 @@ kable(head(NO2_CO))
 Density <- 
   ggplot(NO2_CO, aes(value, color = pollutants)) + 
   geom_density() + 
-  xlab("pollutant levels")
+  xlab("pollutant levels") +
   ggtitle("Density of pollutants associated with UFO sightings")
 
 Density
@@ -657,7 +650,7 @@ Pollutant_dist <-
   geom_boxplot(aes(fill = Region)) +
   geom_jitter() + 
   ylab("pollutant levels") +
-  xlab("air pollutants")
+  xlab("air pollutants") +
   ggtitle("Distribution of NO2 & CO levels in U.S. regions")
 
 Pollutant_dist
@@ -669,15 +662,13 @@ For CO.Mean, the South region showed the lowest mean pollutant levels, associate
 
 
 
-
-
 ```{r, warning = FALSE, message = FALSE, fig.width = 10}
 Pollutants_Regions <- 
   ggplot(data = NO2_CO, aes(x = year,y = value, fill = Region)) + 
-  geom_bar(stat ='identity', position ='stack', width =.9) + 
+  geom_bar(stat = 'identity', position = 'stack', width = 0.9) + 
   facet_wrap(~pollutants, ncol = 3) + 
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) + 
-  ylab("pollutant levels")
+  ylab("pollutant levels") +
   ggtitle("NO2 & CO pollutant levels in U.S. regions over time")
 
 Pollutants_Regions
@@ -685,6 +676,7 @@ Pollutants_Regions
 
 _Findings_
 Pollutant levels fluctuated over time. The Northeast and West regions were associated with the highest pollutant levels and UFO sightings, followed by the South and Midwest regions. NO2.Mean was highest in 2008 and NO2.AQI was highest in 2006. NO2.Mean was lowest in 2000 and 2007 and NO2.AQI was lowest in 2008. Due to the smaller number of cases for CO.AQI and CO.Mean, an association with UFO sightings and U.S. region cannot be determined. There is no recorded data for CO.AQI for 2000 and 2008. 
+
 
 ```{r, fig.height = 8, fig.width = 10}
 Pollutants_States <- 
